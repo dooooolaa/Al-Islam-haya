@@ -11,14 +11,18 @@
   body {
     @apply min-h-screen bg-[#f0fdf4] text-[#334155] dark:bg-[#0f172a] dark:text-[#e5e7eb];
     font-feature-settings: "kern", "liga", "calt";
+    background: var(--color-bg);
+    color: var(--color-text);
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-title font-bold text-[#15803d] dark:text-[#facc15];
+    color: var(--color-heading);
   }
 
   a {
     @apply text-[#2563eb] dark:text-[#38bdf8] underline hover:opacity-80 transition;
+    color: var(--color-link);
   }
 
   h1 {
@@ -63,10 +67,16 @@
 
   .btn {
     @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm border-2 border-[#22c55e] text-[#15803d] dark:text-white dark:bg-[#22c55e] dark:border-[#22c55e] bg-transparent hover:bg-[#22c55e] hover:text-white dark:hover:bg-[#22c55e] dark:hover:text-white;
+    background: var(--color-btn);
+    color: #fff;
+    border: 2px solid var(--color-btn);
   }
 
   .btn-primary {
     @apply bg-[#22c55e] text-white border-[#22c55e] hover:bg-[#16a34a] hover:border-[#16a34a] dark:bg-[#22c55e] dark:text-white dark:border-[#22c55e];
+    background: var(--color-btn);
+    color: #fff;
+    border: 2px solid var(--color-btn);
   }
 
   .btn-secondary {
@@ -77,8 +87,15 @@
     @apply border-2 border-[#22c55e] text-[#15803d] bg-transparent hover:bg-[#bbf7d0] hover:text-[#15803d] dark:border-[#facc15] dark:text-[#facc15] dark:hover:bg-[#1e293b] dark:hover:text-[#facc15];
   }
 
+  .btn:hover, .btn-primary:hover {
+    background: var(--color-btn-hover);
+    border-color: var(--color-btn-hover);
+  }
+
   .card {
     @apply rounded-lg bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-[#bbf7d0] dark:border-[#334155];
+    background: var(--color-card);
+    border: 1px solid var(--color-card-border);
   }
 
   .input {
@@ -116,4 +133,26 @@
   .nav-link-active {
     @apply bg-[#bbf7d0] text-[#15803d] dark:bg-[#334155] dark:text-[#facc15];
   }
+}
+
+:root {
+  --color-bg: #f0fdf4;
+  --color-card: #fff;
+  --color-heading: #065f46;
+  --color-text: #334155;
+  --color-link: #1e3a8a;
+  --color-btn: #22c55e;
+  --color-btn-hover: #16a34a;
+  --color-card-border: #bbf7d0;
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-card: #1e293b;
+  --color-heading: #facc15;
+  --color-text: #e5e7eb;
+  --color-link: #38bdf8;
+  --color-btn: #22c55e;
+  --color-btn-hover: #16a34a;
+  --color-card-border: #334155;
 }
