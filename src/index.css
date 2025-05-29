@@ -78,7 +78,7 @@
   }
 
   .card {
-    @apply rounded-lg bg-white dark:bg-dark-muted shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-gray-200 dark:border-gray-700;
+    @apply rounded-lg bg-black dark:bg-dark-muted shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-gray-600 dark:border-gray-700;
   }
 
   .input {
@@ -119,23 +119,23 @@
 }
 
 :root {
-  --color-bg: #ffffff;
-  --color-card: #ffffff;
+  --color-bg: #b0afaf;
+  --color-card: #615151;
   --color-heading: #2563eb;
   --color-text: #1e293b;
-  --color-link: #2563eb;
-  --color-btn: #2563eb;
-  --color-btn-hover: #1d4ed8;
-  --color-card-border: #e2e8f0;
+  --color-link: #262931;
+  --color-btn: #6f737e;
+  --color-btn-hover: #818696;
+  --color-card-border: #2b3138;
 }
 
 .dark {
-  --color-bg: #0f172a;
-  --color-card: #1e293b;
-  --color-heading: #3b82f6;
-  --color-text: #f8fafc;
-  --color-link: #3b82f6;
-  --color-btn: #3b82f6;
-  --color-btn-hover: #2563eb;
+  --color-bg: #10341e;
+  --color-card: #1d1e21;
+  --color-heading: #383b3e;
+  --color-text: #36383a;
+  --color-link: #446149;
+  --color-btn: #34383f;
+  --color-btn-hover: #272a2f;
   --color-card-border: #334155;
 }
