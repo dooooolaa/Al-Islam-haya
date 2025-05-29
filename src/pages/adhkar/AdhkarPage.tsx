@@ -366,18 +366,17 @@ const AdhkarPage: React.FC = () => {
                     <div className="p-6">
                       <div className="text-xl font-arabic mb-4">{dhikr.text}</div>
                       <div className="flex flex-wrap justify-between items-center mt-4">
-                        <div className="text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
                           <span className="font-medium">المصدر:</span> {dhikr.source}
                         </div>
                         <div className="flex items-center space-x-2 space-x-reverse">
-                          <div className="text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                          <div className="text-sm text-gray-600 dark:text-gray-400">
                             <span className="font-medium">العدد:</span> {dhikr.count}
                           </div>
-                          <div className="flex items-center bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] rounded-full px-3 py-1">
+                          <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1">
                             <button
                               onClick={() => incrementCount(`${activeTab}-${dhikr.id}`)}
-                              className="text-[var(--color-accent)] dark:text-[var(--color-dark-accent)] hover:text-[var(--color-accent-hover)] dark:hover:text-[var(--color-dark-accent-hover)] transition-colors"
-                              aria-label="Increment count"
+                              className="text-light-accent dark:text-dark-accent hover:text-light-accent-hover dark:hover:text-dark-accent-hover transition-colors"
                             >
                               <Repeat size={16} />
                             </button>
@@ -386,8 +385,7 @@ const AdhkarPage: React.FC = () => {
                             </span>
                             <button
                               onClick={() => resetCount(`${activeTab}-${dhikr.id}`)}
-                              className="text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:text-[var(--color-heading)] dark:hover:text-[var(--color-dark-heading)] transition-colors"
-                              aria-label="Reset count"
+                              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
                             >
                               ↺
                             </button>
@@ -395,7 +393,7 @@ const AdhkarPage: React.FC = () => {
                         </div>
                       </div>
                       {dhikr.benefit && (
-                        <div className="mt-4 text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)] bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] p-3 rounded-md">
+                        <div className="mt-4 text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
                           <span className="font-medium">الفضل:</span> {dhikr.benefit}
                         </div>
                       )}

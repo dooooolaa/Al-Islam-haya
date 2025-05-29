@@ -136,11 +136,10 @@ const HadithPage = () => {
           <button 
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            aria-label="Previous page"
             className={`px-4 py-2 border rounded-md transition-theme ${
               currentPage === 1 
-                ? 'opacity-50 cursor-not-allowed border-[var(--color-border)] dark:border-[var(--color-dark-border)] text-[var(--color-text)] dark:text-[var(--color-dark-text)]' 
-                : 'border-[var(--color-border)] dark:border-[var(--color-dark-border)] text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)]'
+                ? 'opacity-50 cursor-not-allowed border-gray-300 dark:border-gray-700 text-gray-400 dark:text-gray-600' 
+                : 'border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
           >
             <ChevronRight size={18} />
@@ -150,12 +149,12 @@ const HadithPage = () => {
             <>
               <button 
                 onClick={() => handlePageChange(1)}
-                className="px-4 py-2 border border-[var(--color-border)] dark:border-[var(--color-dark-border)] rounded-md text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)] transition-theme"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
               >
                 1
               </button>
               {startPage > 2 && (
-                <span className="px-4 py-2 text-[var(--color-text)] dark:text-[var(--color-dark-text)]">...</span>
+                <span className="px-4 py-2 text-gray-500">...</span>
               )}
             </>
           )}
@@ -166,8 +165,8 @@ const HadithPage = () => {
               onClick={() => handlePageChange(number)}
               className={`px-4 py-2 rounded-md transition-theme ${
                 currentPage === number
-                  ? 'bg-[var(--color-accent)] dark:bg-[var(--color-dark-accent)] text-white'
-                  : 'border border-[var(--color-border)] dark:border-[var(--color-dark-border)] text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)]'
+                  ? 'bg-light-accent dark:bg-dark-accent text-white'
+                  : 'border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
               }`}
             >
               {number}
@@ -177,11 +176,11 @@ const HadithPage = () => {
           {endPage < totalPages && (
             <>
               {endPage < totalPages - 1 && (
-                <span className="px-4 py-2 text-[var(--color-text)] dark:text-[var(--color-dark-text)]">...</span>
+                <span className="px-4 py-2 text-gray-500">...</span>
               )}
               <button 
                 onClick={() => handlePageChange(totalPages)}
-                className="px-4 py-2 border border-[var(--color-border)] dark:border-[var(--color-dark-border)] rounded-md text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)] transition-theme"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
               >
                 {totalPages}
               </button>
@@ -191,11 +190,10 @@ const HadithPage = () => {
           <button 
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            aria-label="Next page"
             className={`px-4 py-2 border rounded-md transition-theme ${
               currentPage === totalPages 
-                ? 'opacity-50 cursor-not-allowed border-[var(--color-border)] dark:border-[var(--color-dark-border)] text-[var(--color-text)] dark:text-[var(--color-dark-text)]' 
-                : 'border-[var(--color-border)] dark:border-[var(--color-dark-border)] text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)]'
+                ? 'opacity-50 cursor-not-allowed border-gray-300 dark:border-gray-700 text-gray-400 dark:text-gray-600' 
+                : 'border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
           >
             <ChevronLeft size={18} />
@@ -242,7 +240,7 @@ const HadithPage = () => {
                 onChange={handleSearch}
                 className="input pr-10"
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text)] dark:text-[var(--color-dark-text)]" size={20} />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             </div>
             
             <div className="relative">
@@ -250,16 +248,13 @@ const HadithPage = () => {
                 value={selectedCategory}
                 onChange={handleCategoryChange}
                 className="input pr-10"
-                aria-label="Select category"
               >
                 <option value="">جميع الأبواب</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
+                {categories.map(category => (
+                  <option key={category} value={category}>{category}</option>
                 ))}
               </select>
-              <Filter className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text)] dark:text-[var(--color-dark-text)]" size={20} />
+              <Filter className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             </div>
             
             <div className="relative">
@@ -267,16 +262,13 @@ const HadithPage = () => {
                 value={selectedBook}
                 onChange={handleBookChange}
                 className="input pr-10"
-                aria-label="Select book"
               >
                 <option value="">جميع الكتب</option>
-                {books.map((book) => (
-                  <option key={book} value={book}>
-                    {book}
-                  </option>
+                {books.map(book => (
+                  <option key={book} value={book}>{book}</option>
                 ))}
               </select>
-              <Book className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text)] dark:text-[var(--color-dark-text)]" size={20} />
+              <Book className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             </div>
           </div>
         </div>

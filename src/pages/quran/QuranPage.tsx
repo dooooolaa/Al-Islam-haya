@@ -101,7 +101,7 @@ const QuranPage = () => {
               onChange={handleSearch}
               className="input pr-10"
             />
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text)] dark:text-[var(--color-dark-text)]" size={20} />
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           </div>
         </div>
 
@@ -121,16 +121,16 @@ const QuranPage = () => {
               <div className="flex items-start">
                 <div className={cn(
                   "flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full mb-2 ml-3",
-                  "bg-[var(--color-card)] dark:bg-[var(--color-dark-card)] text-[var(--color-text)] dark:text-[var(--color-dark-text)]"
+                  "bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100"
                 )}>
                   <span className="text-sm font-bold">{formatNumber(surah.number)}</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-1 text-[var(--color-heading)] dark:text-[var(--color-dark-heading)]">{surah.name}</h3>
-                  <p className="text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)] mb-2">
+                  <h3 className="text-xl font-bold mb-1">{surah.name}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                     {surah.englishName} • {surah.englishNameTranslation}
                   </p>
-                  <div className="flex text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                  <div className="flex text-sm text-gray-600 dark:text-gray-400">
                     <span>{formatNumber(surah.numberOfAyahs)} آية</span>
                     <span className="mx-2">•</span>
                     <span>{surah.revelationType === 'Meccan' ? 'مكية' : 'مدنية'}</span>
@@ -142,7 +142,7 @@ const QuranPage = () => {
 
           {filteredSurahs.length === 0 && (
             <div className="col-span-full text-center py-10">
-              <p className="text-lg text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+              <p className="text-lg text-gray-600 dark:text-gray-400">
                 لا توجد نتائج للبحث عن "{searchQuery}"
               </p>
             </div>

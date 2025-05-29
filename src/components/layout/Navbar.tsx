@@ -27,12 +27,12 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[var(--color-bg)] dark:bg-[var(--color-dark-bg)] shadow-sm transition-theme">
+    <header className="sticky top-0 z-50 bg-white dark:bg-dark-bg shadow-sm transition-theme">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 space-x-reverse" onClick={closeMenu}>
-            <BookOpen className="h-6 w-6 text-[var(--color-accent)] dark:text-[var(--color-dark-accent)]" />
+            <BookOpen className="h-6 w-6 text-light-accent dark:text-dark-accent" />
             <span className="font-title text-xl font-bold">الإسلام حياة</span>
           </Link>
 
@@ -46,8 +46,8 @@ const Navbar = () => {
                   cn(
                     'flex items-center px-3 py-2 rounded-md text-sm font-medium transition-theme',
                     isActive
-                      ? 'text-[var(--color-accent)] dark:text-[var(--color-dark-accent)] bg-[var(--color-card)] dark:bg-[var(--color-card)]'
-                      : 'text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:text-[var(--color-accent)] dark:hover:text-[var(--color-dark-accent)]'
+                      ? 'text-light-accent dark:text-dark-accent bg-primary-50 dark:bg-gray-800'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-light-accent dark:hover:text-dark-accent'
                   )
                 }
               >
@@ -61,7 +61,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-2 space-x-reverse">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)] transition-theme"
+              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -70,7 +70,7 @@ const Navbar = () => {
             {/* Mobile menu button */}
             <button
               onClick={toggleMenu}
-              className="md:hidden p-2 rounded-md text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)] transition-theme"
+              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
               aria-expanded={isMenuOpen}
               aria-label="Toggle navigation menu"
             >
@@ -90,7 +90,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden"
           >
-            <nav className="flex flex-col space-y-2 px-4 py-3 bg-[var(--color-bg)] dark:bg-[var(--color-dark-bg)] border-t border-[var(--color-border)] dark:border-[var(--color-dark-border)] transition-theme">
+            <nav className="flex flex-col space-y-2 px-4 py-3 bg-white dark:bg-dark-bg border-t border-gray-200 dark:border-gray-800 transition-theme">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.to}
@@ -99,8 +99,8 @@ const Navbar = () => {
                     cn(
                       'flex items-center px-3 py-3 rounded-md text-base font-medium transition-theme',
                       isActive
-                        ? 'text-[var(--color-accent)] dark:text-[var(--color-dark-accent)] bg-[var(--color-card)] dark:bg-[var(--color-card)]'
-                        : 'text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-hover-bg)]'
+                        ? 'text-light-accent dark:text-dark-accent bg-primary-50 dark:bg-gray-800'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                     )
                   }
                   onClick={closeMenu}

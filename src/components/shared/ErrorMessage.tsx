@@ -10,13 +10,13 @@ const ErrorMessage = ({
   retry 
 }: ErrorMessageProps) => {
   return (
-    <div className="rounded-md bg-[var(--color-error-bg)] dark:bg-[var(--color-dark-error-bg)] p-4 my-4">
+    <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4 my-4">
       <div className="flex">
         <div className="flex-shrink-0">
-          <AlertTriangle className="h-5 w-5 text-[var(--color-error-icon)] dark:text-[var(--color-dark-error-icon)]" />
+          <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400" />
         </div>
         <div className="mr-3">
-          <p className="text-sm font-medium text-[var(--color-error-text)] dark:text-[var(--color-dark-error-text)]">
+          <p className="text-sm font-medium text-red-800 dark:text-red-300">
             {message}
           </p>
         </div>
@@ -25,7 +25,7 @@ const ErrorMessage = ({
         <div className="mt-3">
           <button
             onClick={retry}
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-[var(--color-error-button-text)] dark:text-[var(--color-dark-error-button-text)] bg-[var(--color-error-button-bg)] dark:bg-[var(--color-dark-error-button-bg)] hover:bg-[var(--color-error-button-hover-bg)] dark:hover:bg-[var(--color-dark-error-button-hover-bg)] transition-theme"
+            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/50 transition-theme"
           >
             <RefreshCw className="ml-1.5 h-4 w-4" />
             إعادة المحاولة

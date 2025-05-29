@@ -156,15 +156,3 @@
   --color-btn-hover: #0e7490;
   --color-card-border: #334155;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0f172a;
-    --color-card: #1e293b;
-    --color-heading: #5eead4;
-    --color-text: #cbd5e1;
-    --color-link: #38bdf8;
-    --color-btn: #14b8a6;
-    --color-btn-hover: #0e7490;
-    --color-card-border: #334155;
-  }
-}

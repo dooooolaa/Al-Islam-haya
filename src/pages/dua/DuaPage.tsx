@@ -152,7 +152,7 @@ const DuaPage = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="input pr-10"
             />
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text)] dark:text-[var(--color-dark-text)]" size={20} />
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           </div>
         </div>
         
@@ -164,8 +164,8 @@ const DuaPage = () => {
               onClick={() => handleCategoryChange(category.id)}
               className={`px-4 py-2 m-1 rounded-md font-medium transition-colors ${
                 activeCategory === category.id
-                  ? 'bg-[var(--color-accent)] dark:bg-[var(--color-dark-accent)] text-white'
-                  : 'bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-dark-hover-bg)]'
+                  ? 'bg-light-accent dark:bg-dark-accent text-white'
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
               {category.name}
@@ -186,16 +186,16 @@ const DuaPage = () => {
                 <p className="text-xl leading-relaxed font-quran">{dua.text}</p>
                 
                 {dua.translation && showTranslation[dua.id] && (
-                  <div className="mt-4 p-3 bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] rounded-md">
-                    <p className="text-[var(--color-text)] dark:text-[var(--color-dark-text)] text-sm">{dua.translation}</p>
+                  <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{dua.translation}</p>
                   </div>
                 )}
               </div>
               
-              <div className="flex flex-wrap items-center justify-between mt-4 pt-4 border-t border-[var(--color-border)] dark:border-[var(--color-dark-border)]">
+              <div className="flex flex-wrap items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
                 <div className="flex items-center">
                   {dua.source && (
-                    <p className="text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)]">{dua.source}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{dua.source}</p>
                   )}
                 </div>
 
@@ -203,7 +203,7 @@ const DuaPage = () => {
                   {dua.translation && (
                     <button
                       onClick={() => toggleTranslation(dua.id)}
-                      className="text-sm text-[var(--color-accent)] dark:text-[var(--color-dark-accent)] hover:underline"
+                      className="text-sm text-light-accent dark:text-dark-accent hover:underline"
                     >
                       {showTranslation[dua.id] ? 'إخفاء الترجمة' : 'عرض الترجمة'}
                     </button>
@@ -211,26 +211,26 @@ const DuaPage = () => {
                   
                   <button
                     onClick={() => handleCopyDua(dua.text)}
-                    className="p-2 rounded-full bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-dark-hover-bg)] transition-theme"
+                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme"
                     aria-label="نسخ"
                   >
-                    <Copy size={18} className="text-[var(--color-text)] dark:text-[var(--color-dark-text)]" />
+                    <Copy size={18} className="text-gray-600 dark:text-gray-400" />
                   </button>
                   
                   <button
                     onClick={() => handleShareDua(dua)}
-                    className="p-2 rounded-full bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-dark-hover-bg)] transition-theme"
+                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme"
                     aria-label="مشاركة"
                   >
-                    <Share2 size={18} className="text-[var(--color-text)] dark:text-[var(--color-dark-text)]" />
+                    <Share2 size={18} className="text-gray-600 dark:text-gray-400" />
                   </button>
                   
                   <button
                     onClick={() => toggleFavorite(dua.id)}
                     className={`p-2 rounded-full transition-theme ${
                       favorites.includes(dua.id)
-                        ? 'bg-[var(--color-error-bg)] dark:bg-[var(--color-dark-error-bg)] text-[var(--color-error)] dark:text-[var(--color-dark-error)]'
-                        : 'bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] text-[var(--color-text)] dark:text-[var(--color-dark-text)] hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-dark-hover-bg)]'
+                        ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                        : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                     }`}
                     aria-label={favorites.includes(dua.id) ? 'إزالة من المفضلة' : 'إضافة للمفضلة'}
                   >
@@ -243,7 +243,7 @@ const DuaPage = () => {
 
           {filteredDuas?.length === 0 && (
             <div className="text-center py-10">
-              <p className="text-lg text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+              <p className="text-lg text-gray-600 dark:text-gray-400">
                 لا توجد نتائج{searchQuery ? ` للبحث عن "${searchQuery}"` : ''}
               </p>
             </div>

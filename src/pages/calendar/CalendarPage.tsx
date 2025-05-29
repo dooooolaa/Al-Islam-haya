@@ -272,20 +272,20 @@ const CalendarPage: React.FC = () => {
         <div 
           key={day} 
           className={`h-10 w-10 flex flex-col items-center justify-center rounded-full cursor-pointer relative
-            ${isToday ? 'bg-[var(--color-accent)] dark:bg-[var(--color-dark-accent)] text-white' : ''}
-            ${isSelected && !isToday ? 'bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)]' : ''}
-            ${!isToday && !isSelected ? 'hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-dark-hover-bg)]' : ''}
+            ${isToday ? 'bg-light-accent dark:bg-dark-accent text-white' : ''}
+            ${isSelected && !isToday ? 'bg-gray-200 dark:bg-gray-700' : ''}
+            ${!isToday && !isSelected ? 'hover:bg-gray-100 dark:hover:bg-gray-800' : ''}
           `}
           onClick={() => handleDateClick(day)}
         >
           <span>{day}</span>
           {hijriForDay.getDate() === 1 && (
             <div className="absolute -top-1 -right-1">
-              <Moon size={12} className="text-[var(--color-accent)] dark:text-[var(--color-dark-accent)]" />
+              <Moon size={12} className="text-light-accent dark:text-dark-accent" />
             </div>
           )}
           {hasEvents && (
-            <div className="absolute -bottom-1 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] dark:bg-[var(--color-dark-accent)]"></div>
+            <div className="absolute -bottom-1 w-1.5 h-1.5 rounded-full bg-light-accent dark:bg-dark-accent"></div>
           )}
         </div>
       );
@@ -331,8 +331,7 @@ const CalendarPage: React.FC = () => {
             <div className="flex justify-between items-center mb-6">
               <button 
                 onClick={handlePrevMonth}
-                className="p-2 rounded-full hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-dark-hover-bg)] transition-theme"
-                aria-label="Previous month"
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
               >
                 <ChevronRight size={20} />
               </button>
@@ -341,28 +340,27 @@ const CalendarPage: React.FC = () => {
                 <h2 className="text-xl font-medium">
                   {currentDate.toLocaleDateString('ar-SA', { month: 'long', year: 'numeric' })}
                 </h2>
-                <p className="text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   {formatHijriDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1))}
                 </p>
               </div>
               
               <button 
                 onClick={handleNextMonth}
-                className="p-2 rounded-full hover:bg-[var(--color-hover-bg)] dark:hover:bg-[var(--color-dark-hover-bg)] transition-theme"
-                aria-label="Next month"
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
               >
                 <ChevronLeft size={20} />
               </button>
             </div>
             
             <div className="grid grid-cols-7 gap-1 text-center mb-2">
-              <div className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]">الأحد</div>
-              <div className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]">الإثنين</div>
-              <div className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]">الثلاثاء</div>
-              <div className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]">الأربعاء</div>
-              <div className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]">الخميس</div>
-              <div className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]">الجمعة</div>
-              <div className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-dark-text)]">السبت</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">الأحد</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">الإثنين</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">الثلاثاء</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">الأربعاء</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">الخميس</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">الجمعة</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400">السبت</div>
             </div>
             
             <div className="grid grid-cols-7 gap-1 justify-items-center">
@@ -372,15 +370,15 @@ const CalendarPage: React.FC = () => {
             <div className="mt-6 text-center">
               <div className="flex items-center justify-center space-x-4 space-x-reverse">
                 <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-[var(--color-accent)] dark:bg-[var(--color-dark-accent)] mr-2"></div>
+                  <div className="w-3 h-3 rounded-full bg-light-accent dark:bg-dark-accent mr-2"></div>
                   <span className="text-sm">اليوم</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full border border-[var(--color-accent)] dark:border-[var(--color-dark-accent)] mr-2"></div>
+                  <div className="w-3 h-3 rounded-full border border-light-accent dark:border-dark-accent mr-2"></div>
                   <span className="text-sm">مناسبة إسلامية</span>
                 </div>
                 <div className="flex items-center">
-                  <Moon size={16} className="text-[var(--color-accent)] dark:text-[var(--color-dark-accent)] mr-2" />
+                  <Moon size={16} className="text-light-accent dark:text-dark-accent mr-2" />
                   <span className="text-sm">بداية الشهر الهجري</span>
                 </div>
               </div>
@@ -395,7 +393,7 @@ const CalendarPage: React.FC = () => {
                   <h2 className="text-xl font-medium mb-1">
                     {formatGregorianDate(selectedDate)}
                   </h2>
-                  <p className="text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                  <p className="text-gray-600 dark:text-gray-400">
                     {formatHijriDate(selectedDate)}
                   </p>
                 </div>
@@ -403,17 +401,17 @@ const CalendarPage: React.FC = () => {
                 {selectedEvents.length > 0 ? (
                   <div>
                     <h3 className="text-lg font-medium mb-4 flex items-center">
-                      <CalendarIcon size={18} className="ml-2 text-[var(--color-accent)] dark:text-[var(--color-dark-accent)]" />
+                      <CalendarIcon size={18} className="ml-2 text-light-accent dark:text-dark-accent" />
                       المناسبات الإسلامية
                     </h3>
                     
                     <div className="space-y-4">
                       {selectedEvents.map((event, index) => (
-                        <div key={index} className="p-4 bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] rounded-md">
-                          <h4 className="font-medium text-[var(--color-accent)] dark:text-[var(--color-dark-accent)] mb-2">
+                        <div key={index} className="p-4 bg-gray-50 dark:bg-gray-800 rounded-md">
+                          <h4 className="font-medium text-light-accent dark:text-dark-accent mb-2">
                             {event.name}
                           </h4>
-                          <p className="text-[var(--color-text)] dark:text-[var(--color-dark-text)] text-sm">
+                          <p className="text-gray-600 dark:text-gray-400 text-sm">
                             {event.description}
                           </p>
                         </div>
@@ -421,15 +419,15 @@ const CalendarPage: React.FC = () => {
                     </div>
                   </div>
                 ) : (
-                  <p className="text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                  <p className="text-gray-600 dark:text-gray-400">
                     لا توجد مناسبات إسلامية في هذا اليوم
                   </p>
                 )}
               </div>
             ) : (
               <div className="card flex flex-col items-center justify-center min-h-[300px]">
-                <CalendarIcon size={48} className="text-[var(--color-text)] dark:text-[var(--color-dark-text)] mb-4" />
-                <p className="text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                <CalendarIcon size={48} className="text-gray-300 dark:text-gray-700 mb-4" />
+                <p className="text-gray-600 dark:text-gray-400">
                   اختر يوماً من التقويم لعرض التفاصيل
                 </p>
               </div>
@@ -444,9 +442,9 @@ const CalendarPage: React.FC = () => {
                   // In a real app, we would calculate the actual date for each event
                   // based on the current Hijri year
                   return (
-                    <div key={index} className="flex justify-between items-center p-3 bg-[var(--color-hover-bg)] dark:bg-[var(--color-dark-hover-bg)] rounded-md">
+                    <div key={index} className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
                       <span className="font-medium">{event.name}</span>
-                      <span className="text-sm text-[var(--color-text)] dark:text-[var(--color-dark-text)]">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
                         {event.type === 'hijri' ? 
                           `${event.date.split('-')[0]}/${event.date.split('-')[1]} هـ` : 
                           `${event.date.split('-')[0]}/${event.date.split('-')[1]} م`}
