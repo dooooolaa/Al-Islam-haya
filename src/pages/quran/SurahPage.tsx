@@ -402,7 +402,7 @@ const SurahPage = () => {
       <div className="container-page">
         <button 
           onClick={handleBackClick}
-          className="flex items-center text-light-accent dark:text-dark-accent hover:underline mb-6"
+          className="flex items-center text-[var(--color-link)] hover:underline mb-6"
         >
           <ArrowRight className="ml-1" size={18} />
           العودة لقائمة السور
@@ -425,7 +425,7 @@ const SurahPage = () => {
         {/* Navigation */}
         <button 
           onClick={handleBackClick}
-          className="flex items-center text-light-accent dark:text-dark-accent hover:underline mb-6"
+          className="flex items-center text-[var(--color-link)] hover:underline mb-6"
         >
           <ArrowRight className="ml-1" size={18} />
           العودة لقائمة السور
@@ -433,10 +433,10 @@ const SurahPage = () => {
 
         {/* Surah Header */}
         <div className="surah-header mb-8">
-          <h1 className="text-4xl md:text-5xl font-title font-bold mb-2">
+          <h1 className="text-4xl md:text-5xl font-title font-bold mb-2 section-title">
             سورة {surah.name}
           </h1>
-          <div className="text-gray-600 dark:text-gray-400 mb-4">
+          <div className="text-[var(--color-text)] mb-4">
             <span>{surah.englishName} • {surah.englishNameTranslation}</span>
             <span className="mx-2">|</span>
             <span>{formatNumber(surah.numberOfAyahs)} آية</span>
@@ -447,7 +447,7 @@ const SurahPage = () => {
           {/* Controls */}
           <div className="flex flex-wrap justify-center gap-4 mb-4">
             <div className="flex items-center">
-              <label htmlFor="reciter-select" className="ml-2 text-sm font-medium">
+              <label htmlFor="reciter-select" className="ml-2 text-sm font-medium text-[var(--color-text)]">
                 القارئ:
               </label>
               <select
@@ -464,26 +464,18 @@ const SurahPage = () => {
               </select>
             </div>
 
-            <div className="flex items-center">
-              <label htmlFor="font-size" className="ml-2 text-sm font-medium">
-                حجم الخط:
-              </label>
-              <div className="flex items-center space-x-2 space-x-reverse">
-                <button 
-                  onClick={() => handleFontSizeChange(Math.max(18, fontSize - 2))}
-                  className="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700"
-                >
-                  -
-                </button>
-                <span className="w-8 text-center">{fontSize}</span>
-                <button 
-                  onClick={() => handleFontSizeChange(Math.min(36, fontSize + 2))}
-                  className="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700"
-                >
-                  +
-                </button>
-              </div>
-            </div>
+            <button
+              onClick={() => handleFontSizeChange(fontSize + 2)}
+              className="btn btn-outline text-sm"
+            >
+              تكبير الخط
+            </button>
+            <button
+              onClick={() => handleFontSizeChange(fontSize - 2)}
+              className="btn btn-outline text-sm"
+            >
+              تصغير الخط
+            </button>
 
             <button
               onClick={playSurah}
@@ -505,21 +497,21 @@ const SurahPage = () => {
 
           {/* Audio Error Message */}
           {audioError && (
-            <div className="bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 p-3 rounded-md text-sm mb-4">
+            <div className="bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-200 p-3 rounded-md text-sm mb-4">
               {audioError}
             </div>
           )}
 
           {/* رسالة عدم توفر السورة */}
           {!surahAudioAvailable && !audioError && (
-            <div className="bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 p-3 rounded-md text-sm mb-4">
+            <div className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200 p-3 rounded-md text-sm mb-4">
               هذه السورة غير متوفرة لهذا الشيخ. يرجى اختيار قارئ آخر.
             </div>
           )}
 
           {/* Bismillah */}
           {surah.number !== 1 && surah.number !== 9 && (
-            <p className="text-center quran-text text-2xl my-6">
+            <p className="text-center quran-text text-2xl my-6 text-[var(--color-heading)]">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </p>
           )}
@@ -533,43 +525,41 @@ const SurahPage = () => {
                 key={ayah.number} 
                 id={`ayah-${ayah.numberInSurah}`}
                 className={cn(
-                  "inline relative group",
-                  playingAyah === ayah.number && "bg-primary-50 dark:bg-primary-900/20 rounded"
+                  "inline relative group text-[var(--color-text)]",
+                  playingAyah === ayah.number && "bg-[var(--color-card-border)] rounded"
                 )}
               >
                 <span className="quran-text">{ayah.text}</span>
-                <span className="inline-flex items-center justify-center w-6 h-6 text-sm mx-1 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100">
+                <span className="inline-flex items-center justify-center w-6 h-6 text-sm mx-1 rounded-full bg-[var(--color-btn)] text-white">
                   {formatNumber(ayah.numberInSurah)}
                 </span>
                 
-                <div className="absolute -top-8 right-0 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1 space-x-reverse bg-white dark:bg-gray-800 rounded-md shadow-lg p-1">
+                <div className="absolute -top-8 right-0 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1 space-x-reverse bg-[var(--color-card)] rounded-md shadow-lg p-1 border border-[var(--color-card-border)]">
                   <button
                     onClick={() => handleAudioPlay(ayah.number)}
                     disabled={audioLoading || !surahAudioAvailable}
-                    className={`p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-theme ${
-                      (audioLoading || !surahAudioAvailable) ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
+                    className={`p-1.5 rounded-full hover:bg-[var(--color-card-border)] transition-theme ${ (audioLoading || !surahAudioAvailable) ? 'opacity-50 cursor-not-allowed' : ''}`}
                     aria-label="استماع"
                   >
                     {audioLoading && playingAyah === ayah.number ? (
                       <LoadingSpinner size="sm" />
                     ) : (
-                      <Volume2 size={16} className={playingAyah === ayah.number ? 'text-light-accent dark:text-dark-accent' : 'text-gray-600 dark:text-gray-400'} />
+                      <Volume2 size={16} className={playingAyah === ayah.number ? 'text-[var(--color-link)]' : 'text-[var(--color-text)]'} />
                     )}
                   </button>
                   <button
                     onClick={() => handleCopyAyah(ayah)}
-                    className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-theme"
+                    className="p-1.5 rounded-full hover:bg-[var(--color-card-border)] transition-theme"
                     aria-label="نسخ"
                   >
-                    <Copy size={16} className="text-gray-600 dark:text-gray-400" />
+                    <Copy size={16} className="text-[var(--color-text)]" />
                   </button>
                   <button
                     onClick={() => handleShareAyah(ayah)}
-                    className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-theme"
+                    className="p-1.5 rounded-full hover:bg-[var(--color-card-border)] transition-theme"
                     aria-label="مشاركة"
                   >
-                    <Share2 size={16} className="text-gray-600 dark:text-gray-400" />
+                    <Share2 size={16} className="text-[var(--color-text)]" />
                   </button>
                 </div>
               </div>
@@ -581,12 +571,20 @@ const SurahPage = () => {
         {showScrollTop && (
           <button
             onClick={scrollToTop}
-            className="fixed bottom-6 left-6 p-3 rounded-full bg-light-accent dark:bg-dark-accent text-white shadow-lg hover:opacity-90 transition-opacity"
-            aria-label="العودة للأعلى"
+            className="fixed bottom-6 left-6 p-3 rounded-full bg-[var(--color-btn)] text-white shadow-lg hover:opacity-90 transition-opacity"
+            aria-label="Scroll to top"
           >
             <ChevronUp size={24} />
           </button>
         )}
+
+        {/* Modal for Reciter Unavailable - Example (requires modal component) */}
+        {/* {showModal && ( */}
+        {/*   <Modal onClose={() => setShowModal(false)}> */}
+        {/*     <p>Sorry, audio for this surah is not available for the selected reciter.</p> */}
+        {/*   </Modal> */}
+        {/* )} */}
+
       </motion.div>
     </div>
   );

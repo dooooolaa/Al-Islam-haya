@@ -9,7 +9,7 @@ const HomePage = () => {
       title: 'القرآن الكريم',
       description: 'تصفح القرآن الكريم كاملاً مع تفسير الآيات والاستماع إلى التلاوات بأصوات مختلفة',
       icon: BookOpen,
-      color: 'bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100',
+      color: 'bg-[var(--color-card)] text-[var(--color-heading)]',
       path: '/quran'
     },
     {
@@ -17,7 +17,7 @@ const HomePage = () => {
       title: 'الحديث الشريف',
       description: 'مجموعة من الأحاديث النبوية الصحيحة مصنفة حسب الأبواب الفقهية',
       icon: BookText,
-      color: 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100',
+      color: 'bg-[var(--color-card)] text-[var(--color-heading)]',
       path: '/hadith'
     },
     {
@@ -25,7 +25,7 @@ const HomePage = () => {
       title: 'الأذكار',
       description: 'أذكار الصباح والمساء وأذكار بعد الصلاة وأذكار النوم وغيرها',
       icon: Heart,
-      color: 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100',
+      color: 'bg-[var(--color-card)] text-[var(--color-heading)]',
       path: '/adhkar'
     },
     {
@@ -33,7 +33,7 @@ const HomePage = () => {
       title: 'الأدعية',
       description: 'مجموعة من الأدعية المأثورة عن النبي صلى الله عليه وسلم',
       icon: AtSign,
-      color: 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100',
+      color: 'bg-[var(--color-card)] text-[var(--color-heading)]',
       path: '/dua'
     },
     {
@@ -41,7 +41,7 @@ const HomePage = () => {
       title: 'التقويم الهجري',
       description: 'التقويم الهجري مع المناسبات الإسلامية والأيام الفضيلة',
       icon: Calendar,
-      color: 'bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100',
+      color: 'bg-[var(--color-card)] text-[var(--color-heading)]',
       path: '/calendar'
     },
     {
@@ -49,7 +49,7 @@ const HomePage = () => {
       title: 'اتجاه القبلة',
       description: 'تحديد اتجاه القبلة بناءً على موقعك الحالي',
       icon: Compass,
-      color: 'bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-100',
+      color: 'bg-[var(--color-card)] text-[var(--color-heading)]',
       path: '/qibla'
     }
   ];
@@ -73,16 +73,16 @@ const HomePage = () => {
     <div>
       {/* Hero Section */}
       <motion.section 
-        className="py-16 px-4 text-center bg-pattern-light dark:bg-pattern-dark transition-theme"
+        className="py-16 px-4 text-center bg-[var(--color-bg)] transition-theme"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <div className="container mx-auto">
-          <h1 className="text-4xl md:text-5xl font-title font-bold mb-6">
-            <span className="text-light-accent dark:text-dark-accent">الإسلام حياة</span>
+          <h1 className="text-4xl md:text-5xl font-title font-bold mb-6 section-title">
+            <span className="gradient-text">الإسلام حياة</span>
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-700 dark:text-gray-300">
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-[var(--color-text)]">
             موقع إسلامي شامل يجمع القرآن الكريم والأحاديث النبوية والأذكار والأدعية والمزيد
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -108,7 +108,7 @@ const HomePage = () => {
       <section className="py-12 px-4">
         <div className="container mx-auto">
           <motion.h2 
-            className="text-3xl md:text-4xl font-title font-bold mb-12 text-center"
+            className="text-3xl md:text-4xl font-title font-bold mb-12 text-center section-title"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -129,16 +129,16 @@ const HomePage = () => {
                   className="block group h-full"
                 >
                   <div className="card h-full flex flex-col group-hover:shadow-lg transition-all duration-300">
-                    <div className={`p-3 rounded-full w-16 h-16 flex items-center justify-center mb-6 ${section.color}`}>
+                    <div className={`p-3 rounded-full w-16 h-16 flex items-center justify-center mb-6 ${section.color} border border-[var(--color-card-border)]`}>
                       <section.icon size={24} />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-light-accent dark:group-hover:text-dark-accent transition-theme">
+                    <h3 className="text-xl font-bold mb-3 section-title">
                       {section.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 flex-grow">
+                    <p className="text-[var(--color-text)] flex-grow">
                       {section.description}
                     </p>
-                    <div className="mt-4 text-light-accent dark:text-dark-accent font-medium">
+                    <div className="mt-4 text-[var(--color-link)] font-medium">
                       تصفح القسم →
                     </div>
                   </div>
@@ -150,9 +150,9 @@ const HomePage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 px-4 bg-light-accent dark:bg-dark-accent text-white">
+      <section className="py-16 px-4 bg-[var(--color-link)] text-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-title font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-title font-bold mb-6 section-title text-white">
             احرص على قراءة القرآن وذكر الله كل يوم
           </h2>
           <p className="text-xl max-w-3xl mx-auto mb-8">
@@ -161,7 +161,7 @@ const HomePage = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
               to="/quran" 
-              className="bg-white text-light-accent dark:text-dark-accent hover:bg-gray-100 font-medium py-3 px-6 rounded-md transition-theme"
+              className="bg-white text-[var(--color-link)] hover:bg-[var(--color-card-border)] font-medium py-3 px-6 rounded-md transition-theme"
             >
               ابدأ بقراءة القرآن
             </Link>

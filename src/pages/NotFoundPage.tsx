@@ -4,9 +4,9 @@ import { Home, ArrowRight } from 'lucide-react';
 const NotFoundPage = () => {
   return (
     <div className="container-page min-h-[70vh] flex flex-col items-center justify-center text-center">
-      <h1 className="text-7xl font-bold mb-4 text-light-accent dark:text-dark-accent">404</h1>
-      <h2 className="text-2xl md:text-3xl font-bold mb-6">الصفحة غير موجودة</h2>
-      <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
+      <h1 className="text-7xl font-bold mb-4 text-[var(--color-accent)] dark:text-[var(--color-dark-accent)]">404</h1>
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[var(--color-heading)] dark:text-[var(--color-dark-heading)]">الصفحة غير موجودة</h2>
+      <p className="text-[var(--color-text)] dark:text-[var(--color-dark-text)] max-w-md mb-8">
         عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها.
       </p>
       <div className="flex flex-wrap justify-center gap-4">
