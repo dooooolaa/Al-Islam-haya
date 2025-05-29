@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text;
+    @apply min-h-screen bg-white text-gray-900 dark:bg-dark-bg dark:text-dark-text;
     font-feature-settings: "kern", "liga", "calt";
   }
 
@@ -43,7 +43,7 @@
   }
 
   .ayah-number {
-    @apply inline-flex items-center justify-center w-8 h-8 text-sm rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100 shadow-sm;
+    @apply inline-flex items-center justify-center w-8 h-8 text-base font-bold rounded-full bg-primary-200 text-primary-900 dark:bg-primary-800 dark:text-primary-100 shadow-md border border-primary-300 dark:border-primary-700 transition-all duration-200;
   }
 
   .surah-header {
