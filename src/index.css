@@ -136,23 +136,23 @@
 }
 
 :root {
-  --color-bg: #f0fdf4;
-  --color-card: #fff;
-  --color-heading: #065f46;
-  --color-text: #334155;
-  --color-link: #1e3a8a;
-  --color-btn: #22c55e;
-  --color-btn-hover: #16a34a;
-  --color-card-border: #bbf7d0;
+  --color-bg: #f6fefb;           /* أخضر فاتح جدًا */
+  --color-card: #fff;            /* أبيض */
+  --color-heading: #15803d;      /* أخضر متوسط */
+  --color-text: #374151;         /* رمادي غامق */
+  --color-link: #2563eb;         /* أزرق هادئ */
+  --color-btn: #22c55e;          /* أخضر زاهي */
+  --color-btn-hover: #16a34a;    /* أخضر أغمق */
+  --color-card-border: #e2e8f0;  /* رمادي فاتح */
 }
 
 .dark {
-  --color-bg: #0f172a;
-  --color-card: #1e293b;
-  --color-heading: #facc15;
-  --color-text: #e5e7eb;
-  --color-link: #38bdf8;
-  --color-btn: #22c55e;
-  --color-btn-hover: #16a34a;
-  --color-card-border: #334155;
+  --color-bg: #101624;           /* أزرق داكن جدًا */
+  --color-card: #1e293b;         /* رمادي مزرق داكن */
+  --color-heading: #facc15;      /* أصفر ذهبي */
+  --color-text: #e5e7eb;         /* رمادي فاتح */
+  --color-link: #38bdf8;         /* سماوي فاتح */
+  --color-btn: #22c55e;          /* أخضر زاهي */
+  --color-btn-hover: #16a34a;    /* أخضر أغمق */
+  --color-card-border: #334155;  /* رمادي مزرق داكن */
 }
