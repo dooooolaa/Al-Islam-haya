@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text;
+    font-feature-settings: "kern", "liga", "calt";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-title font-bold;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+
+  h4 {
+    @apply text-lg md:text-xl;
+  }
+}
+
+@layer components {
+  .quran-text {
+    @apply font-quran text-xl leading-loose;
+  }
+
+  .ayah-container {
+    @apply p-4 border-b border-gray-200 dark:border-gray-800;
+  }
+
+  .ayah-number {
+    @apply inline-flex items-center justify-center w-8 h-8 text-sm rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100;
+  }
+
+  .surah-header {
+    @apply py-6 px-4 text-center border-b border-gray-200 dark:border-gray-800;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white;
+  }
+
+  .btn-secondary {
+    @apply bg-light-accent hover:bg-primary-700 text-white dark:bg-dark-accent dark:hover:bg-dark-secondary;
+  }
+
+  .btn-outline {
+    @apply border border-primary-600 text-primary-600 hover:bg-primary-50 dark:border-primary-400 dark:text-primary-400 dark:hover:bg-gray-800;
+  }
+
+  .card {
+    @apply rounded-lg bg-white dark:bg-dark-muted shadow-md p-6;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-dark-accent;
+  }
+
+  .container-page {
+    @apply container mx-auto px-4 py-8;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold mb-6 text-center;
+  }
+
+  .transition-theme {
+    @apply transition-colors duration-300 ease-in-out;
+  }
+}
