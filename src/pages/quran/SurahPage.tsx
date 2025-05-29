@@ -425,7 +425,7 @@ const SurahPage = () => {
         {/* Navigation */}
         <button 
           onClick={handleBackClick}
-          className="flex items-center text-light-accent dark:text-dark-accent hover:underline mb-6"
+          className="flex items-center dark:text-dark-muted dark:text-dark-bg hover:underline mb-6"
         >
           <ArrowRight className="ml-1" size={18} />
           العودة لقائمة السور

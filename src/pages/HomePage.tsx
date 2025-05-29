@@ -73,29 +73,29 @@ const HomePage = () => {
     <div>
       {/* Hero Section */}
       <motion.section 
-        className="py-16 px-4 text-center bg-pattern-light dark:bg-pattern-dark transition-theme"
+        className="py-16 px-4 text-center bg-[#b0afaf] dark:bg-[#10341e] transition-theme"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <div className="container mx-auto">
           <h1 className="text-4xl md:text-5xl font-title font-bold mb-6">
-            <span className="text-light-accent dark:text-dark-accent">الإسلام حياة</span>
+            <span className="text-[#262931] dark:text-[#446149]">الإسلام حياة</span>
           </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-700 dark:text-gray-300">
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-[#262931] dark:text-[#446149]">
             موقع إسلامي شامل يجمع القرآن الكريم والأحاديث النبوية والأذكار والأدعية والمزيد
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
               to="/quran" 
-              className="btn btn-primary"
+              className="btn bg-[#6f737e] text-white hover:bg-[#818696] dark:bg-[#34383f] dark:hover:bg-[#272a2f]"
             >
               <BookOpen className="inline-block ml-1" size={18} />
               تصفح القرآن الكريم
             </Link>
             <Link 
               to="/adhkar" 
-              className="btn btn-outline"
+              className="btn border-[#6f737e] text-[#262931] hover:bg-[#6f737e] hover:text-white dark:border-[#34383f] dark:text-[#446149] dark:hover:bg-[#34383f]"
             >
               <Heart className="inline-block ml-1" size={18} />
               الأذكار اليومية
@@ -105,10 +105,10 @@ const HomePage = () => {
       </motion.section>
 
       {/* Main Sections */}
-      <section className="py-12 px-4">
+      <section className="py-12 px-4 bg-[#b0afaf] dark:bg-[#10341e]">
         <div className="container mx-auto">
           <motion.h2 
-            className="text-3xl md:text-4xl font-title font-bold mb-12 text-center"
+            className="text-3xl md:text-4xl font-title font-bold mb-12 text-center text-[#262931] dark:text-[#446149]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -129,16 +129,16 @@ const HomePage = () => {
                   className="block group h-full"
                 >
                   <div className="card h-full flex flex-col group-hover:shadow-lg transition-all duration-300">
-                    <div className={`p-3 rounded-full w-16 h-16 flex items-center justify-center mb-6 ${section.color}`}>
+                    <div className={`p-3 rounded-full w-16 h-16 flex items-center justify-center mb-6 bg-[#6f737e] dark:bg-[#34383f] text-white`}>
                       <section.icon size={24} />
                     </div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-light-accent dark:group-hover:text-dark-accent transition-theme">
+                    <h3 className="text-xl font-bold mb-3 text-[#262931] dark:text-[#446149] group-hover:text-[#6f737e] dark:group-hover:text-[#34383f] transition-theme">
                       {section.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 flex-grow">
+                    <p className="text-[#262931] dark:text-[#446149] flex-grow">
                       {section.description}
                     </p>
-                    <div className="mt-4 text-light-accent dark:text-dark-accent font-medium">
+                    <div className="mt-4 text-[#6f737e] dark:text-[#34383f] font-medium">
                       تصفح القسم →
                     </div>
                   </div>
