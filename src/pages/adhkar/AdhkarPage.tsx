@@ -385,7 +385,7 @@ const AdhkarPage: React.FC = () => {
                             </span>
                             <button
                               onClick={() => resetCount(`${activeTab}-${dhikr.id}`)}
-                              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                              className="text-gray-900 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
                             >
                               ↺
                             </button>

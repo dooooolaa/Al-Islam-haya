@@ -377,10 +377,6 @@ const CalendarPage: React.FC = () => {
                   <div className="w-3 h-3 rounded-full border border-light-accent dark:border-dark-accent mr-2"></div>
                   <span className="text-sm">مناسبة إسلامية</span>
                 </div>
-                <div className="flex items-center">
-                  <Moon size={16} className="text-light-accent dark:text-dark-accent mr-2" />
-                  <span className="text-sm">بداية الشهر الهجري</span>
-                </div>
               </div>
             </div>
           </div>
@@ -484,7 +480,7 @@ const CalendarPage: React.FC = () => {
             </div>
             
             <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-800 dark:text-gray-700">
                 * بيانات التقويم مستمدة من حسابات فلكية دقيقة وقد تختلف عن الرؤية الشرعية للهلال
               </p>
             </div>
