@@ -9,7 +9,7 @@
   }
 
   body {
-    @apply min-h-screen bg-[#f0fdf4] text-[#334155] dark:bg-[#0f172a] dark:text-[#e5e7eb];
+    @apply min-h-screen bg-[#f9fefb] text-[#1f2937] dark:bg-[#0f172a] dark:text-[#e2e8f0];
     font-feature-settings: "kern", "liga", "calt";
     background: var(--color-bg);
     color: var(--color-text);
@@ -21,7 +21,7 @@
   }
 
   a {
-    @apply text-[#2563eb] dark:text-[#38bdf8] underline hover:opacity-80 transition;
+    @apply text-[#0e7490] dark:text-[#38bdf8] underline hover:opacity-80 transition;
     color: var(--color-link);
   }
 
@@ -54,37 +54,37 @@
   }
 
   .ayah-container {
-    @apply p-4 border-b border-[#bbf7d0] dark:border-[#334155] hover:bg-[#e0f2e9] dark:hover:bg-[#1e293b] transition-colors duration-200 bg-white dark:bg-[#1e293b];
+    @apply p-4 border-b border-[#d1fae5] dark:border-[#334155] hover:bg-[#e0f2e9] dark:hover:bg-[#1e293b] transition-colors duration-200 bg-white dark:bg-[#1e293b];
   }
 
   .ayah-number {
-    @apply inline-flex items-center justify-center w-8 h-8 text-base font-bold rounded-full bg-[#22c55e] text-white shadow-md border border-[#16a34a] transition-all duration-200;
+    @apply inline-flex items-center justify-center w-8 h-8 text-base font-bold rounded-full bg-[#16a34a] text-white shadow-md border border-[#15803d] transition-all duration-200;
   }
 
   .surah-header {
-    @apply py-6 px-4 text-center border-b border-[#bbf7d0] dark:border-[#334155] bg-gradient-to-r from-[#f0fdf4] to-[#bbf7d0] dark:from-[#1e293b] dark:to-[#0f172a];
+    @apply py-6 px-4 text-center border-b border-[#d1fae5] dark:border-[#334155] bg-gradient-to-r from-[#f9fefb] to-[#d1fae5] dark:from-[#1e293b] dark:to-[#0f172a];
   }
 
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm border-2 border-[#22c55e] text-[#15803d] dark:text-white dark:bg-[#22c55e] dark:border-[#22c55e] bg-transparent hover:bg-[#22c55e] hover:text-white dark:hover:bg-[#22c55e] dark:hover:text-white;
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm border-2 border-[#16a34a] text-white dark:text-white dark:bg-[#16a34a] dark:border-[#16a34a] bg-transparent hover:bg-[#16a34a] hover:text-white dark:hover:bg-[#16a34a] dark:hover:text-white;
     background: var(--color-btn);
     color: #fff;
     border: 2px solid var(--color-btn);
   }
 
   .btn-primary {
-    @apply bg-[#22c55e] text-white border-[#22c55e] hover:bg-[#16a34a] hover:border-[#16a34a] dark:bg-[#22c55e] dark:text-white dark:border-[#22c55e];
+    @apply bg-[#16a34a] text-white border-[#16a34a] hover:bg-[#15803d] hover:border-[#15803d] dark:bg-[#16a34a] dark:text-white dark:border-[#16a34a];
     background: var(--color-btn);
     color: #fff;
     border: 2px solid var(--color-btn);
   }
 
   .btn-secondary {
-    @apply bg-white text-[#15803d] border-[#22c55e] hover:bg-[#bbf7d0] dark:bg-[#1e293b] dark:text-white dark:border-[#22c55e] dark:hover:bg-[#22c55e] dark:hover:text-white;
+    @apply bg-white text-[#15803d] border-[#16a34a] hover:bg-[#d1fae5] dark:bg-[#1e293b] dark:text-white dark:border-[#16a34a] dark:hover:bg-[#16a34a] dark:hover:text-white;
   }
 
   .btn-outline {
-    @apply border-2 border-[#22c55e] text-[#15803d] bg-transparent hover:bg-[#bbf7d0] hover:text-[#15803d] dark:border-[#facc15] dark:text-[#facc15] dark:hover:bg-[#1e293b] dark:hover:text-[#facc15];
+    @apply border-2 border-[#16a34a] text-[#15803d] bg-transparent hover:bg-[#d1fae5] hover:text-[#15803d] dark:border-[#facc15] dark:text-[#facc15] dark:hover:bg-[#1e293b] dark:hover:text-[#facc15];
   }
 
   .btn:hover, .btn-primary:hover {
@@ -93,13 +93,13 @@
   }
 
   .card {
-    @apply rounded-lg bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-[#bbf7d0] dark:border-[#334155];
+    @apply rounded-lg bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-[#d1fae5] dark:border-[#334155];
     background: var(--color-card);
     border: 1px solid var(--color-card-border);
   }
 
   .input {
-    @apply w-full px-4 py-2 border-2 border-[#bbf7d0] dark:border-[#334155] rounded-md bg-white dark:bg-[#1e293b] text-[#334155] dark:text-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-[#22c55e] dark:focus:ring-[#facc15] transition-all duration-200;
+    @apply w-full px-4 py-2 border-2 border-[#d1fae5] dark:border-[#334155] rounded-md bg-white dark:bg-[#1e293b] text-[#1f2937] dark:text-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#16a34a] dark:focus:ring-[#facc15] transition-all duration-200;
   }
 
   .container-page {
@@ -107,7 +107,7 @@
   }
 
   .section-title {
-    @apply text-2xl md:text-3xl font-bold mb-6 text-center relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-24 after:h-1 after:bg-[#22c55e] dark:after:bg-[#facc15] after:rounded-full;
+    @apply text-2xl md:text-3xl font-bold mb-6 text-center relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-24 after:h-1 after:bg-[#16a34a] dark:after:bg-[#facc15] after:rounded-full;
   }
 
   .transition-theme {
@@ -123,36 +123,36 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#22c55e] to-[#16a34a] dark:from-[#facc15] dark:to-[#fbbf24] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#16a34a] to-[#15803d] dark:from-[#facc15] dark:to-[#fbbf24] bg-clip-text text-transparent;
   }
 
   .nav-link {
-    @apply px-4 py-2 rounded-md hover:bg-[#bbf7d0] dark:hover:bg-[#334155] transition-colors duration-200 text-[#15803d] dark:text-[#facc15];
+    @apply px-4 py-2 rounded-md hover:bg-[#d1fae5] dark:hover:bg-[#334155] transition-colors duration-200 text-[#15803d] dark:text-[#facc15];
   }
 
   .nav-link-active {
-    @apply bg-[#bbf7d0] text-[#15803d] dark:bg-[#334155] dark:text-[#facc15];
+    @apply bg-[#d1fae5] text-[#15803d] dark:bg-[#334155] dark:text-[#facc15];
   }
 }
 
 :root {
-  --color-bg: #f6fefb;           /* أخضر فاتح جدًا */
-  --color-card: #fff;            /* أبيض */
-  --color-heading: #15803d;      /* أخضر متوسط */
-  --color-text: #374151;         /* رمادي غامق */
-  --color-link: #2563eb;         /* أزرق هادئ */
-  --color-btn: #22c55e;          /* أخضر زاهي */
-  --color-btn-hover: #16a34a;    /* أخضر أغمق */
-  --color-card-border: #e2e8f0;  /* رمادي فاتح */
+  --color-bg: #f9fefb;             /* أخضر فاتح جدًا يشبه الخلفية الورقية */
+  --color-card: #ffffff;           /* أبيض صافي */
+  --color-heading: #15803d;        /* أخضر إسلامي هادئ */
+  --color-text: #1f2937;           /* رمادي داكن مريح للقراءة */
+  --color-link: #0e7490;           /* أزرق مخضر مريح */
+  --color-btn: #16a34a;            /* أخضر زاهي */
+  --color-btn-hover: #15803d;      /* أخضر أغمق */
+  --color-card-border: #d1fae5;    /* أخضر باهت فاتح للحواف */
 }
 
 .dark {
-  --color-bg: #101624;           /* أزرق داكن جدًا */
-  --color-card: #1e293b;         /* رمادي مزرق داكن */
-  --color-heading: #facc15;      /* أصفر ذهبي */
-  --color-text: #e5e7eb;         /* رمادي فاتح */
-  --color-link: #38bdf8;         /* سماوي فاتح */
-  --color-btn: #22c55e;          /* أخضر زاهي */
-  --color-btn-hover: #16a34a;    /* أخضر أغمق */
-  --color-card-border: #334155;  /* رمادي مزرق داكن */
+  --color-bg: #0f172a;             /* كحلي داكن */
+  --color-card: #1e293b;           /* رمادي مزرق أنيق */
+  --color-heading: #facc15;        /* أصفر ذهبي */
+  --color-text: #e2e8f0;           /* رمادي فاتح */
+  --color-link: #38bdf8;           /* أزرق سماوي */
+  --color-btn: #22c55e;            /* أخضر زاهي */
+  --color-btn-hover: #16a34a;      /* أخضر داكن للهوفر */
+  --color-card-border: #334155;    /* رمادي مزرق للحواف */
 }
