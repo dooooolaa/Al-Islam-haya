@@ -41,13 +41,10 @@
     @apply text-lg md:text-xl;
   }
 
-  /* تشكيل القرآن الكريم (الحركات) بألوان واضحة */
-  .diacritic,
-  .tashkeel,
-  .harakat,
-  span[aria-label="diacritic"] {
-    color: var(--color-tashkeel) !important;
-    font-weight: bold;
+  /* تشكيل القرآن (الحركات) */
+  .diacritic, .tashkeel, .harakat, span[aria-label="diacritic"] {
+    color: #fff !important;
+    text-shadow: 0 0 2px #15803d, 0 0 4px #15803d, 0 0 2px #facc15;
   }
 }
 
@@ -139,25 +136,23 @@
 }
 
 :root {
-  --color-bg: #f6fefb;           /* أخضر فاتح جدًا */
-  --color-card: #fff;            /* أبيض */
-  --color-heading: #15803d;      /* أخضر متوسط */
-  --color-text: #374151;         /* رمادي غامق */
-  --color-link: #2563eb;         /* أزرق هادئ */
-  --color-btn: #22c55e;          /* أخضر زاهي */
-  --color-btn-hover: #16a34a;    /* أخضر أغمق */
-  --color-card-border: #e2e8f0;  /* رمادي فاتح */
-  --color-tashkeel: #16a34a;     /* تشكيل أخضر واضح */
+  --color-bg: #f8fafc;
+  --color-card: #fff;
+  --color-heading: #0e766e;
+  --color-text: #334155;
+  --color-link: #0ea5e9;
+  --color-btn: #10b981;
+  --color-btn-hover: #059669;
+  --color-card-border: #e2e8f0;
 }
 
 .dark {
-  --color-bg: #101624;           /* أزرق داكن جدًا */
-  --color-card: #1e293b;         /* رمادي مزرق داكن */
-  --color-heading: #facc15;      /* أصفر ذهبي */
-  --color-text: #e5e7eb;         /* رمادي فاتح */
-  --color-link: #38bdf8;         /* سماوي فاتح */
-  --color-btn: #22c55e;          /* أخضر زاهي */
-  --color-btn-hover: #16a34a;    /* أخضر أغمق */
-  --color-card-border: #334155;  /* رمادي مزرق داكن */
-  --color-tashkeel: #facc15;     /* تشكيل أصفر واضح */
+  --color-bg: #0f172a;
+  --color-card: #1e293b;
+  --color-heading: #5eead4;
+  --color-text: #cbd5e1;
+  --color-link: #38bdf8;
+  --color-btn: #14b8a6;
+  --color-btn-hover: #0e7490;
+  --color-card-border: #334155;
 }
