@@ -35,6 +35,13 @@
   h4 {
     @apply text-lg md:text-xl;
   }
+
+  /* تشكيل القرآن (الحركات) */
+  .diacritic, .tashkeel, .harakat, span[aria-label="diacritic"] {
+    color: #fff !important;
+    /* إذا كان هناك كلاس آخر يلونها بالأحمر سيتم تجاوزه */
+    text-shadow: 0 0 2px #065f46, 0 0 4px #065f46;
+  }
 }
 
 @layer components {
