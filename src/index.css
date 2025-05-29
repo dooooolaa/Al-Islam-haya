@@ -9,20 +9,16 @@
   }
 
   body {
-    @apply min-h-screen bg-[#f0fdf4] text-[#334155] dark:bg-[#0f172a] dark:text-[#e5e7eb];
+    @apply min-h-screen bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text;
     font-feature-settings: "kern", "liga", "calt";
-    background: var(--color-bg);
-    color: var(--color-text);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-title font-bold text-[#15803d] dark:text-[#facc15];
-    color: var(--color-heading);
+    @apply font-title font-bold text-primary-500 dark:text-dark-accent;
   }
 
   a {
-    @apply text-[#2563eb] dark:text-[#38bdf8] underline hover:opacity-80 transition;
-    color: var(--color-link);
+    @apply text-primary-500 dark:text-dark-accent underline hover:opacity-80 transition;
   }
 
   h1 {
@@ -44,7 +40,7 @@
   /* تشكيل القرآن (الحركات) */
   .diacritic, .tashkeel, .harakat, span[aria-label="diacritic"] {
     color: #fff !important;
-    text-shadow: 0 0 2px #15803d, 0 0 4px #15803d, 0 0 2px #facc15;
+    text-shadow: 0 0 2px #2563eb, 0 0 4px #2563eb;
   }
 }
 
@@ -54,52 +50,39 @@
   }
 
   .ayah-container {
-    @apply p-4 border-b border-[#bbf7d0] dark:border-[#334155] hover:bg-[#e0f2e9] dark:hover:bg-[#1e293b] transition-colors duration-200 bg-white dark:bg-[#1e293b];
+    @apply p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-dark-muted transition-colors duration-200 bg-white dark:bg-dark-muted;
   }
 
   .ayah-number {
-    @apply inline-flex items-center justify-center w-8 h-8 text-base font-bold rounded-full bg-[#22c55e] text-white shadow-md border border-[#16a34a] transition-all duration-200;
+    @apply inline-flex items-center justify-center w-8 h-8 text-base font-bold rounded-full bg-primary-500 text-white shadow-md transition-all duration-200;
   }
 
   .surah-header {
-    @apply py-6 px-4 text-center border-b border-[#bbf7d0] dark:border-[#334155] bg-gradient-to-r from-[#f0fdf4] to-[#bbf7d0] dark:from-[#1e293b] dark:to-[#0f172a];
+    @apply py-6 px-4 text-center border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-muted;
   }
 
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm border-2 border-[#22c55e] text-[#15803d] dark:text-white dark:bg-[#22c55e] dark:border-[#22c55e] bg-transparent hover:bg-[#22c55e] hover:text-white dark:hover:bg-[#22c55e] dark:hover:text-white;
-    background: var(--color-btn);
-    color: #fff;
-    border: 2px solid var(--color-btn);
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm border-2 border-primary-500 text-primary-500 dark:text-white dark:bg-primary-500 dark:border-primary-500 bg-transparent hover:bg-primary-500 hover:text-white dark:hover:bg-primary-600;
   }
 
   .btn-primary {
-    @apply bg-[#22c55e] text-white border-[#22c55e] hover:bg-[#16a34a] hover:border-[#16a34a] dark:bg-[#22c55e] dark:text-white dark:border-[#22c55e];
-    background: var(--color-btn);
-    color: #fff;
-    border: 2px solid var(--color-btn);
+    @apply bg-primary-500 text-white border-primary-500 hover:bg-primary-600 hover:border-primary-600 dark:bg-primary-500 dark:text-white dark:border-primary-500;
   }
 
   .btn-secondary {
-    @apply bg-white text-[#15803d] border-[#22c55e] hover:bg-[#bbf7d0] dark:bg-[#1e293b] dark:text-white dark:border-[#22c55e] dark:hover:bg-[#22c55e] dark:hover:text-white;
+    @apply bg-white text-primary-500 border-primary-500 hover:bg-gray-50 dark:bg-dark-muted dark:text-white dark:border-primary-500 dark:hover:bg-primary-500 dark:hover:text-white;
   }
 
   .btn-outline {
-    @apply border-2 border-[#22c55e] text-[#15803d] bg-transparent hover:bg-[#bbf7d0] hover:text-[#15803d] dark:border-[#facc15] dark:text-[#facc15] dark:hover:bg-[#1e293b] dark:hover:text-[#facc15];
-  }
-
-  .btn:hover, .btn-primary:hover {
-    background: var(--color-btn-hover);
-    border-color: var(--color-btn-hover);
+    @apply border-2 border-primary-500 text-primary-500 bg-transparent hover:bg-gray-50 hover:text-primary-500 dark:border-dark-accent dark:text-dark-accent dark:hover:bg-dark-muted dark:hover:text-dark-accent;
   }
 
   .card {
-    @apply rounded-lg bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-[#bbf7d0] dark:border-[#334155];
-    background: var(--color-card);
-    border: 1px solid var(--color-card-border);
+    @apply rounded-lg bg-white dark:bg-dark-muted shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-gray-200 dark:border-gray-700;
   }
 
   .input {
-    @apply w-full px-4 py-2 border-2 border-[#bbf7d0] dark:border-[#334155] rounded-md bg-white dark:bg-[#1e293b] text-[#334155] dark:text-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-[#22c55e] dark:focus:ring-[#facc15] transition-all duration-200;
+    @apply w-full px-4 py-2 border-2 border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-dark-muted text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-dark-accent transition-all duration-200;
   }
 
   .container-page {
@@ -107,7 +90,7 @@
   }
 
   .section-title {
-    @apply text-2xl md:text-3xl font-bold mb-6 text-center relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-24 after:h-1 after:bg-[#22c55e] dark:after:bg-[#facc15] after:rounded-full;
+    @apply text-2xl md:text-3xl font-bold mb-6 text-center relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-24 after:h-1 after:bg-primary-500 dark:after:bg-dark-accent after:rounded-full;
   }
 
   .transition-theme {
@@ -115,7 +98,7 @@
   }
 
   .glass-effect {
-    @apply bg-white/80 dark:bg-[#1e293b]/80 backdrop-blur-md;
+    @apply bg-white/80 dark:bg-dark-muted/80 backdrop-blur-md;
   }
 
   .hover-lift {
@@ -123,36 +106,36 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#22c55e] to-[#16a34a] dark:from-[#facc15] dark:to-[#fbbf24] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 dark:from-dark-accent dark:to-primary-500 bg-clip-text text-transparent;
   }
 
   .nav-link {
-    @apply px-4 py-2 rounded-md hover:bg-[#bbf7d0] dark:hover:bg-[#334155] transition-colors duration-200 text-[#15803d] dark:text-[#facc15];
+    @apply px-4 py-2 rounded-md hover:bg-gray-50 dark:hover:bg-dark-muted transition-colors duration-200 text-primary-500 dark:text-dark-accent;
   }
 
   .nav-link-active {
-    @apply bg-[#bbf7d0] text-[#15803d] dark:bg-[#334155] dark:text-[#facc15];
+    @apply bg-gray-50 text-primary-500 dark:bg-dark-muted dark:text-dark-accent;
   }
 }
 
 :root {
-  --color-bg: #f8fafc;
-  --color-card: #fff;
-  --color-heading: #0e766e;
-  --color-text: #334155;
-  --color-link: #0ea5e9;
-  --color-btn: #10b981;
-  --color-btn-hover: #059669;
+  --color-bg: #ffffff;
+  --color-card: #ffffff;
+  --color-heading: #2563eb;
+  --color-text: #1e293b;
+  --color-link: #2563eb;
+  --color-btn: #2563eb;
+  --color-btn-hover: #1d4ed8;
   --color-card-border: #e2e8f0;
 }
 
 .dark {
   --color-bg: #0f172a;
   --color-card: #1e293b;
-  --color-heading: #5eead4;
-  --color-text: #cbd5e1;
-  --color-link: #38bdf8;
-  --color-btn: #14b8a6;
-  --color-btn-hover: #0e7490;
+  --color-heading: #3b82f6;
+  --color-text: #f8fafc;
+  --color-link: #3b82f6;
+  --color-btn: #3b82f6;
+  --color-btn-hover: #2563eb;
   --color-card-border: #334155;
 }
