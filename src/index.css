@@ -1,13 +1,4 @@
-/* Light Mode Colors (Default)
-  - Background: #f0fdf4
-  - Text: #374151
-  - Headings: #065f46
-  - Links: #1e3a8a
-  - Cards: #ffffff
-  - Buttons: #065f46 / Hover: #047857
-  - Highlights: #bbf7d0
-*/
-
+/* ألوان متناسقة وعصرية للوضعين */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,16 +9,16 @@
   }
 
   body {
-    @apply min-h-screen bg-[#f0fdf4] text-[#374151] dark:bg-[#0f172a] dark:text-[#e5e7eb];
+    @apply min-h-screen bg-[#f0fdf4] text-[#334155] dark:bg-[#0f172a] dark:text-[#e5e7eb];
     font-feature-settings: "kern", "liga", "calt";
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-title font-bold text-[#065f46] dark:text-[#facc15];
+    @apply font-title font-bold text-[#15803d] dark:text-[#facc15];
   }
 
   a {
-    @apply text-[#1e3a8a] dark:text-[#38bdf8] underline hover:opacity-80 transition;
+    @apply text-[#2563eb] dark:text-[#38bdf8] underline hover:opacity-80 transition;
   }
 
   h1 {
@@ -46,9 +37,10 @@
     @apply text-lg md:text-xl;
   }
 
+  /* تشكيل القرآن (الحركات) */
   .diacritic, .tashkeel, .harakat, span[aria-label="diacritic"] {
     color: #fff !important;
-    text-shadow: 0 0 2px #065f46, 0 0 4px #065f46;
+    text-shadow: 0 0 2px #15803d, 0 0 4px #15803d, 0 0 2px #facc15;
   }
 }
 
@@ -58,39 +50,39 @@
   }
 
   .ayah-container {
-    @apply p-4 border-b border-gray-200 dark:border-gray-700 hover:bg-[#e0f2e9] dark:hover:bg-[#1e293b] transition-colors duration-200 bg-white dark:bg-[#1e293b];
+    @apply p-4 border-b border-[#bbf7d0] dark:border-[#334155] hover:bg-[#e0f2e9] dark:hover:bg-[#1e293b] transition-colors duration-200 bg-white dark:bg-[#1e293b];
   }
 
   .ayah-number {
-    @apply inline-flex items-center justify-center w-8 h-8 text-base font-bold rounded-full bg-[#065f46] text-white shadow-md border border-[#065f46] transition-all duration-200;
+    @apply inline-flex items-center justify-center w-8 h-8 text-base font-bold rounded-full bg-[#22c55e] text-white shadow-md border border-[#16a34a] transition-all duration-200;
   }
 
   .surah-header {
-    @apply py-6 px-4 text-center border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-[#f0fdf4] to-[#bbf7d0] dark:from-[#1e293b] dark:to-[#0f172a];
+    @apply py-6 px-4 text-center border-b border-[#bbf7d0] dark:border-[#334155] bg-gradient-to-r from-[#f0fdf4] to-[#bbf7d0] dark:from-[#1e293b] dark:to-[#0f172a];
   }
 
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm border-2 border-[#065f46] text-[#065f46] dark:text-white dark:bg-[#065f46] dark:border-[#065f46] bg-transparent hover:bg-[#065f46] hover:text-white dark:hover:bg-[#065f46] dark:hover:text-white;
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm border-2 border-[#22c55e] text-[#15803d] dark:text-white dark:bg-[#22c55e] dark:border-[#22c55e] bg-transparent hover:bg-[#22c55e] hover:text-white dark:hover:bg-[#22c55e] dark:hover:text-white;
   }
 
   .btn-primary {
-    @apply bg-[#065f46] text-white border-[#065f46] hover:bg-[#047857] hover:border-[#047857] dark:bg-[#065f46] dark:text-white dark:border-[#065f46];
+    @apply bg-[#22c55e] text-white border-[#22c55e] hover:bg-[#16a34a] hover:border-[#16a34a] dark:bg-[#22c55e] dark:text-white dark:border-[#22c55e];
   }
 
   .btn-secondary {
-    @apply bg-white text-[#065f46] border-[#065f46] hover:bg-[#bbf7d0] dark:bg-[#1e293b] dark:text-white dark:border-[#065f46] dark:hover:bg-[#065f46] dark:hover:text-white;
+    @apply bg-white text-[#15803d] border-[#22c55e] hover:bg-[#bbf7d0] dark:bg-[#1e293b] dark:text-white dark:border-[#22c55e] dark:hover:bg-[#22c55e] dark:hover:text-white;
   }
 
   .btn-outline {
-    @apply border-2 border-[#065f46] text-[#065f46] bg-transparent hover:bg-[#bbf7d0] hover:text-[#065f46] dark:border-[#facc15] dark:text-[#facc15] dark:hover:bg-[#1e293b] dark:hover:text-[#facc15];
+    @apply border-2 border-[#22c55e] text-[#15803d] bg-transparent hover:bg-[#bbf7d0] hover:text-[#15803d] dark:border-[#facc15] dark:text-[#facc15] dark:hover:bg-[#1e293b] dark:hover:text-[#facc15];
   }
 
   .card {
-    @apply rounded-lg bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-gray-200 dark:border-gray-700;
+    @apply rounded-lg bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg p-6 transition-all duration-200 border border-[#bbf7d0] dark:border-[#334155];
   }
 
   .input {
-    @apply w-full px-4 py-2 border-2 border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-[#1e293b] text-[#374151] dark:text-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-[#065f46] dark:focus:ring-[#facc15] transition-all duration-200;
+    @apply w-full px-4 py-2 border-2 border-[#bbf7d0] dark:border-[#334155] rounded-md bg-white dark:bg-[#1e293b] text-[#334155] dark:text-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-[#22c55e] dark:focus:ring-[#facc15] transition-all duration-200;
   }
 
   .container-page {
@@ -98,7 +90,7 @@
   }
 
   .section-title {
-    @apply text-2xl md:text-3xl font-bold mb-6 text-center relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-24 after:h-1 after:bg-[#065f46] dark:after:bg-[#facc15] after:rounded-full;
+    @apply text-2xl md:text-3xl font-bold mb-6 text-center relative after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-24 after:h-1 after:bg-[#22c55e] dark:after:bg-[#facc15] after:rounded-full;
   }
 
   .transition-theme {
@@ -114,14 +106,14 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#065f46] to-[#16a34a] dark:from-[#facc15] dark:to-[#fbbf24] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#22c55e] to-[#16a34a] dark:from-[#facc15] dark:to-[#fbbf24] bg-clip-text text-transparent;
   }
 
   .nav-link {
-    @apply px-4 py-2 rounded-md hover:bg-[#bbf7d0] dark:hover:bg-[#334155] transition-colors duration-200 text-[#065f46] dark:text-[#facc15];
+    @apply px-4 py-2 rounded-md hover:bg-[#bbf7d0] dark:hover:bg-[#334155] transition-colors duration-200 text-[#15803d] dark:text-[#facc15];
   }
 
   .nav-link-active {
-    @apply bg-[#bbf7d0] text-[#065f46] dark:bg-[#334155] dark:text-[#facc15];
+    @apply bg-[#bbf7d0] text-[#15803d] dark:bg-[#334155] dark:text-[#facc15];
   }
 }
