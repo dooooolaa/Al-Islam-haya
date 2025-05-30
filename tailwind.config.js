@@ -19,6 +19,11 @@ export default {
         'dark-text': '#f8fafc',
         'dark-accent': '#3b82f6',
         'dark-muted': '#1e293b',
+        // Adding specific colors for diacritics
+        diacritic: {
+          light: '#e53e3e', // A shade of red for light mode
+          dark: '#f6ad55', // A shade of orange for dark mode
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

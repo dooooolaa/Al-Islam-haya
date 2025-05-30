@@ -39,7 +39,7 @@
 
   /* تشكيل القرآن (الحركات) */
   .diacritic, .tashkeel, .harakat, span[aria-label="diacritic"] {
-    color: #fff !important;
+    @apply text-diacritic-light dark:text-diacritic-dark;
   }
 }
 
