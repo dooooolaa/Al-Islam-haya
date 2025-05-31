@@ -8,19 +8,12 @@
   }
 
   body {
-    @apply min-h-screen bg-ref-light-bg text-ref-light-text dark:bg-ref-dark-bg dark:text-ref-dark-text transition-colors duration-300 ease-in-out font-sans;
+    @apply min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text;
     font-feature-settings: "kern", "liga", "calt";
-    direction: rtl; /* Ensure Right-to-Left layout */
   }
 
-  /* Use reference text colors */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-ref-light-text-hero dark:text-ref-dark-text;
-  }
-
-  /* Default link style - adjust in components if needed */
-  a {
-    @apply text-ref-light-text-nav dark:text-ref-dark-text-nav hover:opacity-80 transition;
+    @apply font-title font-bold;
   }
 
   h1 {
@@ -38,11 +31,6 @@
   h4 {
     @apply text-lg md:text-xl;
   }
-
-  /* Keep diacritic styling - ensure color works in both modes */
-  .diacritic, .tashkeel, .harakat, span[aria-label="diacritic"] {
-    color: inherit; /* Or set specific light/dark if needed */
-  }
 }
 
 @layer components {
@@ -50,67 +38,51 @@
     @apply font-quran text-xl leading-loose;
   }
 
-  /* Card base style - specific colors applied in components */
-  .card {
-    @apply rounded-lg bg-light-card-bg-quran dark:bg-ref-dark-card-bg shadow-md hover:shadow-lg p-4 md:p-6 transition-all duration-300 border-l-4;
-    /* Default light bg, dark bg from ref. Border color set per card type */
+  .ayah-container {
+    @apply p-4 border-b border-gray-200 dark:border-gray-800;
   }
 
-  /* Button base style */
+  .ayah-number {
+    @apply inline-flex items-center justify-center w-8 h-8 text-sm rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100;
+  }
+
+  .surah-header {
+    @apply py-6 px-4 text-center border-b border-gray-200 dark:border-gray-800;
+  }
+
   .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 border;
+    @apply px-4 py-2 rounded-md font-medium transition-colors;
   }
 
-  /* Reference Button 1 Style (e.g., تصفح القرآن الكريم) */
-  .btn-ref-primary {
-    @apply bg-ref-light-btn1-bg text-ref-light-btn1-text border-transparent dark:bg-ref-dark-btn1-bg dark:text-ref-dark-btn1-text focus:ring-green-500;
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white;
   }
 
-  /* Reference Button 2 Style (e.g., الأذكار اليومية) */
-  .btn-ref-secondary {
-    @apply bg-transparent text-ref-light-btn2-text border-ref-light-btn2-border dark:text-ref-dark-btn2-text dark:border-ref-dark-btn2-border hover:bg-green-50 dark:hover:bg-green-900/20 focus:ring-green-500;
+  .btn-secondary {
+    @apply bg-light-accent hover:bg-primary-700 text-white dark:bg-dark-accent dark:hover:bg-dark-secondary;
+  }
+
+  .btn-outline {
+    @apply border border-primary-600 text-primary-600 hover:bg-primary-50 dark:border-primary-400 dark:text-primary-400 dark:hover:bg-gray-800;
+  }
+
+  .card {
+    @apply rounded-lg bg-white dark:bg-dark-muted shadow-md p-6;
   }
 
   .input {
-    @apply w-full px-4 py-2 border border-ref-light-card-border dark:border-ref-dark-card-border rounded-md bg-ref-light-bg dark:bg-ref-dark-card-bg text-ref-light-text dark:text-ref-dark-text focus:outline-none focus:ring-2 focus:ring-accent-quran dark:focus:ring-accent-quran transition-colors duration-200;
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-dark-accent;
   }
 
   .container-page {
-    @apply container mx-auto px-4 py-8 max-w-7xl;
+    @apply container mx-auto px-4 py-8;
   }
 
-  /* Section title like 'أقسام الموقع' */
   .section-title {
-    @apply text-2xl md:text-3xl font-bold mb-8 text-center text-ref-light-text-hero dark:text-ref-dark-text;
+    @apply text-2xl md:text-3xl font-bold mb-6 text-center;
   }
 
   .transition-theme {
     @apply transition-colors duration-300 ease-in-out;
   }
-
-  .hover-lift {
-    @apply transition-transform duration-200 hover:-translate-y-1;
-  }
-
-  /* Nav link base style */
-  .nav-link {
-    @apply px-3 py-2 rounded-md text-sm font-medium text-ref-light-text-nav dark:text-ref-dark-text-nav hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 border-2 border-transparent;
-    /* Active state border color applied in Navbar component */
-  }
-
-  /* Mid section style (Green/Teal banner) */
-  .mid-section {
-      @apply py-12 px-4 text-center bg-ref-light-mid-bg text-ref-light-mid-text dark:bg-ref-dark-mid-bg dark:text-ref-dark-mid-text transition-colors duration-300;
-  }
-
-  /* Footer base style */
-  .footer {
-      @apply py-8 px-4 mt-12 bg-ref-light-footer-bg text-ref-light-footer-text dark:bg-ref-dark-footer-bg dark:text-ref-dark-footer-text transition-colors duration-300;
-  }
-
-  .footer a {
-      @apply text-ref-light-footer-link dark:text-ref-dark-footer-link hover:underline;
-  }
-
 }
-

@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowRight, Volume2, Copy, Share2, ChevronUp, Play, Pause } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Volume2, Copy, Share2, ChevronUp, Play, Pause, Repeat, SkipForward, SkipBack, Download, ListMusic, Shuffle } from 'lucide-react'; // Added Repeat, SkipForward, SkipBack, Download, ListMusic, Shuffle, ArrowLeft
 import { motion } from 'framer-motion';
-import { cn, formatNumber, copyToClipboard, generateShareLink } from '../../lib/utils';
+import { cn, formatNumber, copyToClipboard, generateShareLink, formatTime } from '../../lib/utils'; // Added formatTime
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import ErrorMessage from '../../components/shared/ErrorMessage';
+
+// Import reciter images (adjust paths as needed)
+import raadAlkurdyImg from '../../assets/reciters/raad_alkurdy.jpeg';
+// Add imports for other reciter images here if available, otherwise use a default
+// import defaultReciterImg from '../../assets/reciters/default.png';
 
 interface Ayah {
   number: number;
@@ -28,38 +33,20 @@ interface Reciter {
   id: string;
   name: string;
   audioUrl: string;
-  type: 'api' | 'direct'; // نوع مصدر الصوت: API أو رابط مباشر
-  surahPrefix?: string; // بادئة رقم السورة للروابط المباشرة
-  ayahPrefix?: string; // بادئة رقم الآية للروابط المباشرة
-  fileExtension?: string; // امتداد الملف للروابط المباشرة
+  image: string; // Added image field
+  type: 'api' | 'direct';
+  surahPrefix?: string;
+  ayahPrefix?: string;
+  fileExtension?: string;
 }
 
+// TODO: Add actual image paths for other reciters or use a default
 const reciters: Reciter[] = [
-  { 
-    id: 'minshawi_mojawwad',
-    name: 'محمد صديق المنشاوي (مجود)',
-    audioUrl: 'https://server8.mp3quran.net/minsh/',
-    type: 'direct',
-    fileExtension: '.mp3'
-  },
-  { 
-    id: 'husary_mojawwad',
-    name: 'محمود خليل الحصري (مجود)',
-    audioUrl: 'https://server13.mp3quran.net/husr/',
-    type: 'direct',
-    fileExtension: '.mp3'
-  },
-  { 
-    id: 'husary_murattal',
-    name: 'محمود خليل الحصري (مرتل)',
-    audioUrl: 'https://server7.mp3quran.net/husary/',
-    type: 'direct',
-    fileExtension: '.mp3'
-  },
   { 
     id: 'kurdi',
     name: 'رعد محمد الكردي',
     audioUrl: 'https://server6.mp3quran.net/kurdi/',
+    image: raadAlkurdyImg, // Use imported image
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -67,6 +54,7 @@ const reciters: Reciter[] = [
     id: 'alafasy',
     name: 'مشاري راشد العفاسي',
     audioUrl: 'https://server7.mp3quran.net/afs/',
+    image: '', // Placeholder - Add image path or default
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -74,6 +62,7 @@ const reciters: Reciter[] = [
     id: 'sudais',
     name: 'عبد الرحمن السديس',
     audioUrl: 'https://server11.mp3quran.net/sds/',
+    image: '', // Placeholder
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -81,6 +70,7 @@ const reciters: Reciter[] = [
     id: 'shuraim',
     name: 'سعود الشريم',
     audioUrl: 'https://server7.mp3quran.net/shur/',
+    image: '', // Placeholder
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -88,6 +78,7 @@ const reciters: Reciter[] = [
     id: 'maher',
     name: 'ماهر المعيقلي',
     audioUrl: 'https://server12.mp3quran.net/maher/',
+    image: '', // Placeholder
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -95,6 +86,23 @@ const reciters: Reciter[] = [
     id: 'abdulbasit',
     name: 'عبد الباسط عبد الصمد',
     audioUrl: 'https://server7.mp3quran.net/basit/',
+    image: '', // Placeholder
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  { 
+    id: 'husary_mojawwad',
+    name: 'محمود خليل الحصري (مجود)',
+    audioUrl: 'https://server13.mp3quran.net/husr/',
+    image: '', // Placeholder
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  { 
+    id: 'minshawi_mojawwad',
+    name: 'محمد صديق المنشاوي (مجود)',
+    audioUrl: 'https://server8.mp3quran.net/minsh/',
+    image: '', // Placeholder
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -102,37 +110,66 @@ const reciters: Reciter[] = [
     id: 'ghamdi',
     name: 'سعد الغامدي',
     audioUrl: 'https://server7.mp3quran.net/s_gmd/',
+    image: '', // Placeholder
     type: 'direct',
     fileExtension: '.mp3'
-  }
+  },
+  // Add other reciters from the original list if needed
 ];
 
 const SurahPage = () => {
   const { surahNumber } = useParams<{ surahNumber: string }>();
   const navigate = useNavigate();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   
   const [surah, setSurah] = useState<Surah | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedReciter, setSelectedReciter] = useState<string>('alafasy');
-  const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
-  const [playingAyah, setPlayingAyah] = useState<number | null>(null);
-  const [isPlayingSurah, setIsPlayingSurah] = useState(false);
-  const [currentAyahIndex, setCurrentAyahIndex] = useState(0);
+  const [selectedReciterId, setSelectedReciterId] = useState<string>('kurdi'); // Default to Kurdi as in image
+  // const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null); // Use audioRef instead
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isRepeating, setIsRepeating] = useState(false);
+  const [volume, setVolume] = useState(1); // Add volume state (0 to 1)
+  const [showVolumeControl, setShowVolumeControl] = useState(false);
+  // const [playingAyah, setPlayingAyah] = useState<number | null>(null); // Keep for ayah highlighting if needed, but main player is for full surah
+  // const [currentAyahIndex, setCurrentAyahIndex] = useState(0); // Keep for ayah-by-ayah if implemented later
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [fontSize, setFontSize] = useState<number>(24);
   const [audioError, setAudioError] = useState<string | null>(null);
   const [audioLoading, setAudioLoading] = useState(false);
   const [surahAudioAvailable, setSurahAudioAvailable] = useState(true);
 
+  const currentReciter = reciters.find(r => r.id === selectedReciterId);
+  const currentSurahNumber = parseInt(surahNumber || '1');
+
   useEffect(() => {
+    // Reset state when surahNumber changes
+    setSurah(null);
+    setLoading(true);
+    setError(null);
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setAudioError(null);
+    setAudioLoading(false);
+    setSurahAudioAvailable(true);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null; // Ensure new audio element is created
+    }
+
     const fetchSurah = async () => {
       if (!surahNumber) return;
       
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/ar.asad`);
+        // Using a different API endpoint that might be more reliable or detailed if needed
+        // const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/ar.alafasy`); // Example with specific reciter
+        const response = await fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/ar.asad`); // Keep original for text
         const data = await response.json();
         
         if (data.code === 200 && data.status === 'OK') {
@@ -149,6 +186,14 @@ const SurahPage = () => {
     };
 
     fetchSurah();
+
+    // Cleanup audio on component unmount or surah change
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
   }, [surahNumber]);
 
   useEffect(() => {
@@ -160,19 +205,67 @@ const SurahPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // إعادة تعيين حالة توفر الصوت عند تغيير القارئ
+  // Reset audio state when reciter changes
   useEffect(() => {
     setSurahAudioAvailable(true);
     setAudioError(null);
-    
-    // إيقاف الصوت الحالي عند تغيير القارئ
-    if (currentAudio) {
-      currentAudio.pause();
-      setPlayingAyah(null);
-      setCurrentAudio(null);
-      setIsPlayingSurah(false);
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setAudioLoading(false);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      // Don't nullify here, just update src if needed, or let playSurah handle creation
     }
-  }, [selectedReciter]);
+    // Automatically try to load new audio if it was playing?
+    // Consider UX: maybe wait for user to press play again.
+  }, [selectedReciterId]);
+
+  // Audio Event Listeners Setup
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+    const handleLoadedMetadata = () => setDuration(audio.duration);
+    const handleEnded = () => {
+      if (isRepeating) {
+        audio.currentTime = 0;
+        audio.play();
+      } else {
+        setIsPlaying(false);
+        // Optionally play next surah automatically?
+        // handleNextSurah(); 
+      }
+    };
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleWaiting = () => setAudioLoading(true);
+    const handleCanPlay = () => setAudioLoading(false);
+    const handleError = () => handleAudioError(audio);
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('waiting', handleWaiting);
+    audio.addEventListener('canplay', handleCanPlay);
+    audio.addEventListener('error', handleError);
+
+    // Cleanup listeners
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('waiting', handleWaiting);
+      audio.removeEventListener('canplay', handleCanPlay);
+      audio.removeEventListener('error', handleError);
+    };
+  }, [audioRef.current, isRepeating]); // Re-attach if audio element or isRepeating changes
 
   const handleFontSizeChange = (newSize: number) => {
     setFontSize(newSize);
@@ -182,187 +275,156 @@ const SurahPage = () => {
     navigate('/quran');
   };
 
-  const handleAudioError = (audio: HTMLAudioElement) => {
-    let errorMessage = 'هذه السورة غير متوفرة لهذا الشيخ. يرجى اختيار قارئ آخر.';
-    
-    // تعيين حالة عدم توفر الصوت للسورة
+  const handleAudioError = (audio: HTMLAudioElement | null = null) => {
+    let errorMessage = 'ملف الصوت غير متوفر حالياً لهذا القارئ أو السورة.';
     setSurahAudioAvailable(false);
-    
     setAudioError(errorMessage);
     setAudioLoading(false);
-    setPlayingAyah(null);
-    setCurrentAudio(null);
-    setIsPlayingSurah(false);
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    // Don't nullify audioRef here, user might retry
     
-    // إزالة رسالة الخطأ بعد 5 ثوانٍ
+    // Remove error message after 5 seconds
     setTimeout(() => setAudioError(null), 5000);
   };
 
-  const getAudioUrl = (reciterId: string, surahNum: number): string => {
+  const getAudioUrl = (reciterId: string, surahNum: number): string | null => {
     const reciter = reciters.find(r => r.id === reciterId);
-    
-    if (!reciter) {
-      throw new Error('Reciter not found');
+    if (!reciter || !reciter.audioUrl || !reciter.fileExtension) {
+      console.error('Reciter or audio info not found for ID:', reciterId);
+      return null;
     }
-    
-    // تنسيق رقم السورة بثلاثة أرقام (مثال: 001، 012، 114)
     const formattedSurahNumber = surahNum.toString().padStart(3, '0');
-    
     return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
   };
 
-  const createAudioElement = (surahNum: number): HTMLAudioElement => {
-    const audio = new Audio();
-    
-    // إذا كانت السورة غير متوفرة، لا نحاول تحميل الصوت
-    if (!surahAudioAvailable) {
-      throw new Error('Surah audio not available for this reciter');
+  const createAndLoadAudio = (surahNum: number): boolean => {
+    const audioSrc = getAudioUrl(selectedReciterId, surahNum);
+    if (!audioSrc) {
+      handleAudioError();
+      return false;
     }
-    
-    audio.addEventListener('error', () => handleAudioError(audio));
-    
-    audio.addEventListener('loadstart', () => {
-      setAudioLoading(true);
-    });
 
-    audio.addEventListener('canplaythrough', () => {
-      setAudioLoading(false);
-    });
-
-    // تحميل مسبق للآية التالية للتشغيل المستمر
-    audio.preload = 'auto';
-    
     try {
-      audio.src = getAudioUrl(selectedReciter, surahNum);
+      if (!audioRef.current || audioRef.current.src !== audioSrc) {
+        // Pause and cleanup old audio if exists
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
+        // Create new audio element
+        const newAudio = new Audio(audioSrc);
+        newAudio.preload = 'metadata'; // Load metadata initially
+        newAudio.volume = volume;
+        audioRef.current = newAudio;
+        setAudioLoading(true); // Indicate loading start
+        setSurahAudioAvailable(true); // Assume available until error
+        setAudioError(null);
+      } else {
+        // Audio element exists and src is the same, ensure it's ready
+        setAudioLoading(false); 
+      }
+      return true;
     } catch (error) {
-      console.error('Error creating audio element:', error);
-      handleAudioError(audio);
-      throw error;
+      console.error('Error creating or loading audio element:', error);
+      handleAudioError();
+      return false;
     }
-    
-    return audio;
   };
 
   const playSurah = async () => {
-    if (!surah || !surahAudioAvailable) return;
+    if (!surah) return;
 
-    if (isPlayingSurah) {
-      if (currentAudio) {
-        currentAudio.pause();
-        setCurrentAudio(null);
+    if (isPlaying) {
+      audioRef.current?.pause();
+    } else {
+      if (!audioRef.current || audioRef.current.src !== getAudioUrl(selectedReciterId, surah.number)) {
+        // If audio not loaded or source is different, load it first
+        const loaded = createAndLoadAudio(surah.number);
+        if (loaded && audioRef.current) {
+          try {
+            await audioRef.current.play();
+          } catch (err) {
+            console.error("Error playing audio: ", err);
+            handleAudioError(audioRef.current);
+          }
+        }
+      } else {
+        // Audio is loaded and source is correct, just play
+        try {
+          await audioRef.current?.play();
+        } catch (err) {
+          console.error("Error playing audio: ", err);
+          handleAudioError(audioRef.current);
+        }
       }
-      setIsPlayingSurah(false);
-      setPlayingAyah(null);
-      setCurrentAyahIndex(0);
-      return;
-    }
-
-    setIsPlayingSurah(true);
-    
-    try {
-      const audio = createAudioElement(surah.number);
-      
-      audio.onended = () => {
-        setIsPlayingSurah(false);
-        setPlayingAyah(null);
-        setCurrentAudio(null);
-      };
-      
-      audio.onplay = () => {
-        setPlayingAyah(surah.ayahs[0].number);
-      };
-      
-      if (currentAudio) {
-        currentAudio.pause();
-      }
-      
-      setCurrentAudio(audio);
-      await audio.play();
-    } catch (error) {
-      console.error('Error playing surah:', error);
-      setIsPlayingSurah(false);
-    }
-  };
-
-  const handleAudioPlay = (ayahNumber: number) => {
-    if (!surahAudioAvailable) {
-      setAudioError('هذه السورة غير متوفرة لهذا الشيخ. يرجى اختيار قارئ آخر.');
-      setTimeout(() => setAudioError(null), 5000);
-      return;
-    }
-    
-    if (isPlayingSurah) {
-      if (currentAudio) {
-        currentAudio.pause();
-      }
-      setIsPlayingSurah(false);
-    }
-
-    if (currentAudio) {
-      currentAudio.pause();
-      if (playingAyah === ayahNumber) {
-        setPlayingAyah(null);
-        setCurrentAudio(null);
-        setAudioLoading(false);
-        return;
-      }
-    }
-
-    try {
-      if (!surah) return;
-      
-      const audio = createAudioElement(surah.number);
-      
-      audio.onended = () => {
-        setPlayingAyah(null);
-        setCurrentAudio(null);
-        setAudioLoading(false);
-      };
-
-      audio.onplay = () => {
-        setPlayingAyah(ayahNumber);
-      };
-
-      setCurrentAudio(audio);
-      audio.play().catch(err => {
-        console.error('Error playing audio:', err);
-        handleAudioError(audio);
-      });
-    } catch (error) {
-      console.error('Error in handleAudioPlay:', error);
-      setAudioLoading(false);
     }
   };
 
   const handleReciterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newReciter = event.target.value;
-    
-    if (currentAudio) {
-      currentAudio.pause();
-      setPlayingAyah(null);
-      setCurrentAudio(null);
-      setAudioLoading(false);
-    }
-    
-    setIsPlayingSurah(false);
-    setSelectedReciter(newReciter);
-    setSurahAudioAvailable(true); // إعادة تعيين حالة توفر الصوت عند تغيير القارئ
+    setSelectedReciterId(event.target.value);
+    // Audio state reset is handled by the useEffect hook watching selectedReciterId
   };
 
+  const handleSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current) {
+      const newTime = parseFloat(event.target.value);
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  };
+
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(event.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
+  const toggleRepeat = () => {
+    setIsRepeating(!isRepeating);
+  };
+
+  const handleDownload = () => {
+    if (!surah) return;
+    const url = getAudioUrl(selectedReciterId, surah.number);
+    if (url) {
+      // Create a temporary link element and click it to trigger download
+      const link = document.createElement('a');
+      link.href = url;
+      // Suggest a filename (optional)
+      link.download = `Surah_${surah.number}_${currentReciter?.name || selectedReciterId}.mp3`; 
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      alert('رابط التحميل غير متوفر.');
+    }
+  };
+
+  const handlePreviousSurah = () => {
+    if (currentSurahNumber > 1) {
+      navigate(`/quran/${currentSurahNumber - 1}`);
+    }
+  };
+
+  const handleNextSurah = () => {
+    if (currentSurahNumber < 114) {
+      navigate(`/quran/${currentSurahNumber + 1}`);
+    }
+  };
+
+  // Ayah-specific actions (Copy, Share) - Keep as they are or integrate with main player?
+  // For now, keep the hover actions for individual ayahs.
   const handleCopyAyah = async (ayah: Ayah) => {
     const textToCopy = `${ayah.text} [${surah?.name} ${formatNumber(ayah.numberInSurah)}]`;
     const success = await copyToClipboard(textToCopy);
-    
-    if (success) {
-      alert('تم نسخ الآية بنجاح');
-    } else {
-      alert('فشل في نسخ الآية');
-    }
+    alert(success ? 'تم نسخ الآية بنجاح' : 'فشل في نسخ الآية');
   };
 
   const handleShareAyah = async (ayah: Ayah) => {
     const shareUrl = generateShareLink(`/quran/${surah?.number}?ayah=${ayah.numberInSurah}`);
-    
     if (navigator.share) {
       try {
         await navigator.share({
@@ -373,15 +435,11 @@ const SurahPage = () => {
       } catch (err) {
         console.error('Error sharing:', err);
         const success = await copyToClipboard(shareUrl);
-        if (success) {
-          alert('تم نسخ رابط الآية بنجاح');
-        }
+        if (success) alert('تم نسخ رابط الآية بنجاح');
       }
     } else {
       const success = await copyToClipboard(shareUrl);
-      if (success) {
-        alert('تم نسخ رابط الآية بنجاح');
-      }
+      if (success) alert('تم نسخ رابط الآية بنجاح');
     }
   };
 
@@ -389,7 +447,9 @@ const SurahPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (loading) {
+  // --- Render Logic ---
+
+  if (loading && !surah) { // Show loading only if surah data is not yet available
     return (
       <div className="container-page min-h-[70vh] flex items-center justify-center">
         <LoadingSpinner size="lg" />
@@ -397,7 +457,7 @@ const SurahPage = () => {
     );
   }
 
-  if (error || !surah) {
+  if (error) { // Show error if fetching failed
     return (
       <div className="container-page">
         <button 
@@ -408,134 +468,312 @@ const SurahPage = () => {
           العودة لقائمة السور
         </button>
         <ErrorMessage 
-          message={error || 'لم يتم العثور على السورة'} 
+          message={error} 
           retry={() => window.location.reload()}
         />
       </div>
     );
   }
+  
+  if (!surah) { // Handle case where loading finished but surah is still null (shouldn't happen ideally)
+     return (
+      <div className="container-page">
+        <button 
+          onClick={handleBackClick}
+          className="flex items-center text-light-accent dark:text-dark-accent hover:underline mb-6"
+        >
+          <ArrowRight className="ml-1" size={18} />
+          العودة لقائمة السور
+        </button>
+        <ErrorMessage message="لم يتم العثور على بيانات السورة." />
+      </div>
+    );
+  }
 
+  // --- Main Render --- 
   return (
-    <div className="container-page">
+    <div className="container-page text-white" dir="rtl"> {/* Ensure RTL direction and white text for dark theme */} 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {/* Navigation */}
-        <button 
-          onClick={handleBackClick}
-          className="flex items-center dark:text-dark-muted dark:text-dark-bg hover:underline mb-6"
-        >
-          <ArrowRight className="ml-1" size={18} />
-          العودة لقائمة السور
-        </button>
-
-        {/* Surah Header */}
-        <div className="surah-header mb-8">
-          <h1 className="text-4xl md:text-5xl font-title font-bold mb-2">
+        {/* Top Surah Navigation (as per image) */}
+        <div className="flex justify-between items-center mb-6 bg-gray-800 p-4 rounded-lg shadow-md">
+          <button
+            onClick={handlePreviousSurah}
+            disabled={currentSurahNumber <= 1}
+            className="flex items-center gap-2 px-4 py-2 bg-gray-700 rounded-md hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            <ArrowRight size={20} /> {/* Arrow points right for Previous in RTL */} 
+            <span>السورة السابقة</span>
+             {/* Optionally display previous surah name */} 
+          </button>
+          <h1 className="text-2xl font-bold font-title">
             سورة {surah.name}
           </h1>
-          <div className="text-gray-600 dark:text-gray-400 mb-4">
-            <span>{surah.englishName} • {surah.englishNameTranslation}</span>
-            <span className="mx-2">|</span>
-            <span>{formatNumber(surah.numberOfAyahs)} آية</span>
-            <span className="mx-2">|</span>
-            <span>{surah.revelationType === 'Meccan' ? 'مكية' : 'مدنية'}</span>
+          <button
+            onClick={handleNextSurah}
+            disabled={currentSurahNumber >= 114}
+            className="flex items-center gap-2 px-4 py-2 bg-gray-700 rounded-md hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            <span>السورة التالية</span>
+            <ArrowLeft size={20} /> {/* Arrow points left for Next in RTL */} 
+             {/* Optionally display next surah name */} 
+          </button>
+        </div>
+
+        {/* Main Player Section (as per image) */}
+        <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-8 flex flex-col items-center relative">
+          {/* Download Button (Top Left in Image) */}
+          <button
+            onClick={handleDownload}
+            disabled={!surahAudioAvailable}
+            className="absolute top-4 left-4 p-2 bg-gray-700 rounded-full hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            aria-label="تحميل السورة"
+          >
+            <Download size={20} />
+          </button>
+
+          {/* Reciter Image */}
+          <img 
+            src={currentReciter?.image || ''} // Use placeholder if no image
+            alt={currentReciter?.name || 'Reciter'}
+            className="w-24 h-24 rounded-full object-cover border-4 border-gray-700 shadow-md mb-4"
+            onError={(e) => { e.currentTarget.src = ''; /* Handle image load error, maybe show default */ }} 
+          />
+
+          {/* Reciter and Surah Name */}
+          <h2 className="text-xl font-semibold mb-1">{currentReciter?.name || 'القارئ'}</h2>
+          <p className="text-gray-400 mb-4">سورة {surah.name}</p>
+
+          {/* Seek Bar */}
+          <div className="w-full max-w-md mb-2">
+            <input 
+              type="range"
+              min="0"
+              max={duration || 0}
+              value={currentTime}
+              onChange={handleSeek}
+              disabled={!surahAudioAvailable || audioLoading}
+              className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="شريط التقدم"
+            />
           </div>
 
-          {/* Controls */}
-          <div className="flex flex-wrap justify-center gap-4 mb-4">
-            <div className="flex items-center">
-              <label htmlFor="reciter-select" className="ml-2 text-sm font-medium">
-                القارئ:
-              </label>
-              <select
-                id="reciter-select"
-                value={selectedReciter}
-                onChange={handleReciterChange}
-                className="input py-1 max-w-xs"
+          {/* Time Display */}
+          <div className="w-full max-w-md flex justify-between text-xs text-gray-400 mb-4 px-1">
+            <span>{formatTime(currentTime)}</span>
+            <span>{formatTime(duration)}</span>
+          </div>
+
+          {/* Audio Controls (as per image, adjusted for request) */}
+          <div className="flex items-center justify-center space-x-4 space-x-reverse w-full max-w-md">
+            {/* Volume Control (Icon + Slider on hover/click?) - Simplified for now */}
+            <div className="relative">
+              <button 
+                onClick={() => setShowVolumeControl(!showVolumeControl)}
+                className="p-2 text-gray-400 hover:text-white transition-colors"
+                aria-label="الصوت"
               >
-                {reciters.map((reciter) => (
-                  <option key={reciter.id} value={reciter.id}>
-                    {reciter.name}
-                  </option>
-                ))}
-              </select>
+                <Volume2 size={20} />
+              </button>
+              {showVolumeControl && (
+                <input 
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                  className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-yellow-500"
+                  aria-label="مستوى الصوت"
+                />
+              )}
             </div>
 
-            <div className="flex items-center">
-              <label htmlFor="font-size" className="ml-2 text-sm font-medium">
+            {/* Repeat Button */}
+            <button
+              onClick={toggleRepeat}
+              className={`p-2 ${isRepeating ? 'text-yellow-500' : 'text-gray-400'} hover:text-white transition-colors`}
+              aria-label="تكرار"
+            >
+              <Repeat size={20} />
+            </button>
+
+            {/* Previous Button (Placeholder - Image shows track skip, request implies Surah skip which is handled above) */}
+            {/* <button 
+              className="p-2 text-gray-400 hover:text-white transition-colors disabled:opacity-50"
+              aria-label="السابق"
+              // onClick={handlePreviousTrack} // Add if needed
+              disabled={true} 
+            >
+              <SkipBack size={24} />
+            </button> */}
+
+            {/* Play/Pause Button */}
+            <button
+              onClick={playSurah}
+              disabled={!surahAudioAvailable || audioLoading}
+              className="p-3 bg-yellow-500 text-gray-900 rounded-full hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mx-2 shadow-lg"
+              aria-label={isPlaying ? 'إيقاف مؤقت' : 'تشغيل'}
+            >
+              {audioLoading ? (
+                <LoadingSpinner size="sm" className="w-6 h-6" />
+              ) : isPlaying ? (
+                <Pause size={24} />
+              ) : (
+                <Play size={24} />
+              )}
+            </button>
+
+            {/* Next Button (Placeholder - Image shows track skip) */}
+            {/* <button 
+              className="p-2 text-gray-400 hover:text-white transition-colors disabled:opacity-50"
+              aria-label="التالي"
+              // onClick={handleNextTrack} // Add if needed
+              disabled={true}
+            >
+              <SkipForward size={24} />
+            </button> */}
+
+            {/* Shuffle Button (Placeholder - From image, not requested) */}
+            {/* <button 
+              className="p-2 text-gray-400 hover:text-white transition-colors"
+              aria-label="عشوائي"
+            >
+              <Shuffle size={20} />
+            </button> */}
+
+            {/* Playlist Button (Placeholder - From image, not requested) */}
+            {/* <button 
+              className="p-2 text-gray-400 hover:text-white transition-colors"
+              aria-label="قائمة التشغيل"
+            >
+              <ListMusic size={20} />
+            </button> */}
+            
+             {/* Reciter Select Dropdown */}
+             <div className="flex items-center">
+               {/* <label htmlFor="reciter-select" className="ml-2 text-sm font-medium text-gray-400">
+                 القارئ:
+               </label> */} 
+               <select
+                 id="reciter-select"
+                 value={selectedReciterId}
+                 onChange={handleReciterChange}
+                 className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 max-w-xs"
+               >
+                 {reciters.map((reciter) => (
+                   <option key={reciter.id} value={reciter.id}>
+                     {reciter.name}
+                   </option>
+                 ))}
+               </select>
+             </div>
+
+          </div>
+
+          {/* Audio Error Message */}
+          {audioError && (
+            <div className="bg-red-900/30 text-red-200 p-3 rounded-md text-sm mt-4 w-full max-w-md text-center">
+              {audioError}
+            </div>
+          )}
+          {!surahAudioAvailable && !audioError && (
+             <div className="bg-yellow-900/30 text-yellow-200 p-3 rounded-md text-sm mt-4 w-full max-w-md text-center">
+               ملف الصوت غير متوفر حالياً لهذا القارئ أو السورة.
+             </div>
+           )}
+        </div>
+
+        {/* Ayahs Section */}
+        <div className="card bg-gray-800 p-6 rounded-lg shadow-lg">
+          {/* Font Size Control */}
+          <div className="flex justify-end items-center mb-4">
+              <label htmlFor="font-size" className="ml-2 text-sm font-medium text-gray-400">
                 حجم الخط:
               </label>
               <div className="flex items-center space-x-2 space-x-reverse">
                 <button 
                   onClick={() => handleFontSizeChange(Math.max(18, fontSize - 2))}
-                  className="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700"
+                  className="px-2 py-1 rounded bg-gray-700 hover:bg-gray-600 text-white"
                 >
                   -
                 </button>
-                <span className="w-8 text-center">{fontSize}</span>
+                <span className="w-8 text-center text-white">{fontSize}</span>
                 <button 
                   onClick={() => handleFontSizeChange(Math.min(36, fontSize + 2))}
-                  className="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700"
+                  className="px-2 py-1 rounded bg-gray-700 hover:bg-gray-600 text-white"
                 >
                   +
                 </button>
               </div>
             </div>
-
-            <button
-              onClick={playSurah}
-              disabled={audioLoading || !surahAudioAvailable}
-              className={`btn ${isPlayingSurah ? 'btn-primary' : 'btn-outline'} flex items-center ${
-                (audioLoading || !surahAudioAvailable) ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-            >
-              {audioLoading ? (
-                <LoadingSpinner size="sm" className="ml-2" />
-              ) : isPlayingSurah ? (
-                <Pause className="ml-2" size={18} />
-              ) : (
-                <Play className="ml-2" size={18} />
-              )}
-              {isPlayingSurah ? 'إيقاف التلاوة' : 'استماع للسورة كاملة'}
-            </button>
-          </div>
-
-          {/* Audio Error Message */}
-          {audioError && (
-            <div className="bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 p-3 rounded-md text-sm mb-4">
-              {audioError}
-            </div>
-          )}
-
-          {/* رسالة عدم توفر السورة */}
-          {!surahAudioAvailable && !audioError && (
-            <div className="bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 p-3 rounded-md text-sm mb-4">
-              هذه السورة غير متوفرة لهذا الشيخ. يرجى اختيار قارئ آخر.
-            </div>
-          )}
-
+            
           {/* Bismillah */}
           {surah.number !== 1 && surah.number !== 9 && (
-            <p className="text-center quran-text text-2xl my-6">
+            <p className="text-center quran-text text-2xl my-6 text-yellow-400 font-arabic">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </p>
           )}
-        </div>
-
-        {/* Ayahs */}
-        <div className="card">
-          <div className="flex flex-wrap gap-4 text-justify leading-loose" style={{ fontSize: `${fontSize}px` }}>
+          
+          {/* Ayah Text */}
+          <div className="flex flex-wrap gap-x-2 gap-y-4 text-justify leading-loose font-arabic" style={{ fontSize: `${fontSize}px` }}>
             {surah.ayahs.map((ayah) => (
               <div 
                 key={ayah.number} 
                 id={`ayah-${ayah.numberInSurah}`}
                 className={cn(
-                  "inline relative group",
-                  playingAyah === ayah.number && "bg-primary-50 dark:bg-primary-900/20 rounded"
+                  "inline relative group text-white",
+                  // Add highlighting if ayah-by-ayah playback is implemented
+                  // playingAyah === ayah.number && "bg-yellow-900/30 rounded"
                 )}
               >
-        
-(Content truncated due to size limit. Use line ranges to read in chunks)
+                <span className="quran-text">{ayah.text}</span>
+                {/* Ayah number circle */}
+                <span className="inline-flex items-center justify-center w-7 h-7 text-xs mx-1 rounded-full bg-gray-700 text-yellow-400 font-sans">
+                  {formatNumber(ayah.numberInSurah)}
+                </span>
+                
+                {/* Ayah Actions (Hover) */}
+                <div className="absolute -top-10 right-1/2 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1 space-x-reverse bg-gray-900 rounded-md shadow-lg p-1 border border-gray-700 z-10">
+                  {/* Ayah Play Button (Removed - main player handles full surah) */}
+                  {/* <button ...> <Volume2/> </button> */}
+                  <button
+                    onClick={() => handleCopyAyah(ayah)}
+                    className="p-1.5 rounded-full hover:bg-gray-700 transition-colors text-gray-400 hover:text-white"
+                    aria-label="نسخ"
+                  >
+                    <Copy size={16} />
+                  </button>
+                  <button
+                    onClick={() => handleShareAyah(ayah)}
+                    className="p-1.5 rounded-full hover:bg-gray-700 transition-colors text-gray-400 hover:text-white"
+                    aria-label="مشاركة"
+                  >
+                    <Share2 size={16} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll to Top Button */}
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            className="fixed bottom-6 left-6 p-3 rounded-full bg-yellow-500 text-gray-900 shadow-lg hover:bg-yellow-400 transition-opacity z-50"
+            aria-label="العودة للأعلى"
+          >
+            <ChevronUp size={24} />
+          </button>
+        )}
+      </motion.div>
+    </div>
+  );
+};
+
+export default SurahPage;
+

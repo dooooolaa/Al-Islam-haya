@@ -10,25 +10,12 @@ interface IslamicEvent {
   type: 'hijri' | 'gregorian';
 }
 
-interface HijriMonthData {
-  hijriMonth: number;
-  hijriYear: number;
-  gregorianStart: string; // Format: YYYY-MM-DD
-  gregorianEnd: string; // Format: YYYY-MM-DD
-  daysMapping: {
-    hijriDay: number;
-    gregorianDate: string; // Format: YYYY-MM-DD
-    weekDay: string;
-  }[];
-}
-
 const CalendarPage: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [hijriDate, setHijriDate] = useState<any>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [events, setEvents] = useState<IslamicEvent[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<IslamicEvent[]>([]);
-  const [hijriCalendarData, setHijriCalendarData] = useState<HijriMonthData[]>([]);
 
   useEffect(() => {
     // Initialize Hijri date
@@ -38,9 +25,6 @@ const CalendarPage: React.FC = () => {
     
     // Load Islamic events
     loadIslamicEvents();
-    
-    // Load Hijri calendar data
-    loadHijriCalendarData();
   }, []);
 
   useEffect(() => {
@@ -53,99 +37,16 @@ const CalendarPage: React.FC = () => {
     }
   }, [selectedDate, events]);
 
-  const loadHijriCalendarData = () => {
-    // This function would typically fetch data from an API
-    // For now, we'll use static data based on hijridates.com
-    
-    // Example data structure for Dhul-Qi'dah 1445
-    const dhulQidah1445: HijriMonthData = {
-      hijriMonth: 11,
-      hijriYear: 1445,
-      gregorianStart: '2024-05-09',
-      gregorianEnd: '2024-06-07',
-      daysMapping: [
-        { hijriDay: 1, gregorianDate: '2024-05-09', weekDay: 'الخميس' },
-        { hijriDay: 2, gregorianDate: '2024-05-10', weekDay: 'الجمعة' },
-        { hijriDay: 3, gregorianDate: '2024-05-11', weekDay: 'السبت' },
-        { hijriDay: 4, gregorianDate: '2024-05-12', weekDay: 'الأحد' },
-        { hijriDay: 5, gregorianDate: '2024-05-13', weekDay: 'الإثنين' },
-        { hijriDay: 6, gregorianDate: '2024-05-14', weekDay: 'الثلاثاء' },
-        { hijriDay: 7, gregorianDate: '2024-05-15', weekDay: 'الأربعاء' },
-        { hijriDay: 8, gregorianDate: '2024-05-16', weekDay: 'الخميس' },
-        { hijriDay: 9, gregorianDate: '2024-05-17', weekDay: 'الجمعة' },
-        { hijriDay: 10, gregorianDate: '2024-05-18', weekDay: 'السبت' },
-        { hijriDay: 11, gregorianDate: '2024-05-19', weekDay: 'الأحد' },
-        { hijriDay: 12, gregorianDate: '2024-05-20', weekDay: 'الإثنين' },
-        { hijriDay: 13, gregorianDate: '2024-05-21', weekDay: 'الثلاثاء' },
-        { hijriDay: 14, gregorianDate: '2024-05-22', weekDay: 'الأربعاء' },
-        { hijriDay: 15, gregorianDate: '2024-05-23', weekDay: 'الخميس' },
-        { hijriDay: 16, gregorianDate: '2024-05-24', weekDay: 'الجمعة' },
-        { hijriDay: 17, gregorianDate: '2024-05-25', weekDay: 'السبت' },
-        { hijriDay: 18, gregorianDate: '2024-05-26', weekDay: 'الأحد' },
-        { hijriDay: 19, gregorianDate: '2024-05-27', weekDay: 'الإثنين' },
-        { hijriDay: 20, gregorianDate: '2024-05-28', weekDay: 'الثلاثاء' },
-        { hijriDay: 21, gregorianDate: '2024-05-29', weekDay: 'الأربعاء' },
-        { hijriDay: 22, gregorianDate: '2024-05-30', weekDay: 'الخميس' },
-        { hijriDay: 23, gregorianDate: '2024-05-31', weekDay: 'الجمعة' },
-        { hijriDay: 24, gregorianDate: '2024-06-01', weekDay: 'السبت' },
-        { hijriDay: 25, gregorianDate: '2024-06-02', weekDay: 'الأحد' },
-        { hijriDay: 26, gregorianDate: '2024-06-03', weekDay: 'الإثنين' },
-        { hijriDay: 27, gregorianDate: '2024-06-04', weekDay: 'الثلاثاء' },
-        { hijriDay: 28, gregorianDate: '2024-06-05', weekDay: 'الأربعاء' },
-        { hijriDay: 29, gregorianDate: '2024-06-06', weekDay: 'الخميس' },
-        { hijriDay: 30, gregorianDate: '2024-06-07', weekDay: 'الجمعة' }
-      ]
-    };
-    
-    // Example data for Dhul-Hijjah 1445
-    const dhulHijjah1445: HijriMonthData = {
-      hijriMonth: 12,
-      hijriYear: 1445,
-      gregorianStart: '2024-06-08',
-      gregorianEnd: '2024-07-07',
-      daysMapping: [
-        { hijriDay: 1, gregorianDate: '2024-06-08', weekDay: 'السبت' },
-        { hijriDay: 2, gregorianDate: '2024-06-09', weekDay: 'الأحد' },
-        { hijriDay: 3, gregorianDate: '2024-06-10', weekDay: 'الإثنين' },
-        { hijriDay: 4, gregorianDate: '2024-06-11', weekDay: 'الثلاثاء' },
-        { hijriDay: 5, gregorianDate: '2024-06-12', weekDay: 'الأربعاء' },
-        { hijriDay: 6, gregorianDate: '2024-06-13', weekDay: 'الخميس' },
-        { hijriDay: 7, gregorianDate: '2024-06-14', weekDay: 'الجمعة' },
-        { hijriDay: 8, gregorianDate: '2024-06-15', weekDay: 'السبت' },
-        { hijriDay: 9, gregorianDate: '2024-06-16', weekDay: 'الأحد' },
-        { hijriDay: 10, gregorianDate: '2024-06-17', weekDay: 'الإثنين' },
-        { hijriDay: 11, gregorianDate: '2024-06-18', weekDay: 'الثلاثاء' },
-        { hijriDay: 12, gregorianDate: '2024-06-19', weekDay: 'الأربعاء' },
-        { hijriDay: 13, gregorianDate: '2024-06-20', weekDay: 'الخميس' },
-        { hijriDay: 14, gregorianDate: '2024-06-21', weekDay: 'الجمعة' },
-        { hijriDay: 15, gregorianDate: '2024-06-22', weekDay: 'السبت' },
-        { hijriDay: 16, gregorianDate: '2024-06-23', weekDay: 'الأحد' },
-        { hijriDay: 17, gregorianDate: '2024-06-24', weekDay: 'الإثنين' },
-        { hijriDay: 18, gregorianDate: '2024-06-25', weekDay: 'الثلاثاء' },
-        { hijriDay: 19, gregorianDate: '2024-06-26', weekDay: 'الأربعاء' },
-        { hijriDay: 20, gregorianDate: '2024-06-27', weekDay: 'الخميس' },
-        { hijriDay: 21, gregorianDate: '2024-06-28', weekDay: 'الجمعة' },
-        { hijriDay: 22, gregorianDate: '2024-06-29', weekDay: 'السبت' },
-        { hijriDay: 23, gregorianDate: '2024-06-30', weekDay: 'الأحد' },
-        { hijriDay: 24, gregorianDate: '2024-07-01', weekDay: 'الإثنين' },
-        { hijriDay: 25, gregorianDate: '2024-07-02', weekDay: 'الثلاثاء' },
-        { hijriDay: 26, gregorianDate: '2024-07-03', weekDay: 'الأربعاء' },
-        { hijriDay: 27, gregorianDate: '2024-07-04', weekDay: 'الخميس' },
-        { hijriDay: 28, gregorianDate: '2024-07-05', weekDay: 'الجمعة' },
-        { hijriDay: 29, gregorianDate: '2024-07-06', weekDay: 'السبت' },
-        { hijriDay: 30, gregorianDate: '2024-07-07', weekDay: 'الأحد' }
-      ]
-    };
-    
-    // Add more months as needed
-    setHijriCalendarData([dhulQidah1445, dhulHijjah1445]);
-  };
-
   const loadIslamicEvents = () => {
     // These are major Islamic events with approximate Hijri dates
     // In a real app, these would be calculated precisely for each year
     const islamicEvents: IslamicEvent[] = [
-      // رأس السنة الهجرية removed as per user request
+      {
+        name: 'رأس السنة الهجرية',
+        date: '01-01', // Muharram 1
+        description: 'بداية السنة الهجرية الجديدة',
+        type: 'hijri'
+      },
       {
         name: 'يوم عاشوراء',
         date: '01-10', // Muharram 10
@@ -377,6 +278,10 @@ const CalendarPage: React.FC = () => {
                   <div className="w-3 h-3 rounded-full border border-light-accent dark:border-dark-accent mr-2"></div>
                   <span className="text-sm">مناسبة إسلامية</span>
                 </div>
+                <div className="flex items-center">
+                  <Moon size={16} className="text-light-accent dark:text-dark-accent mr-2" />
+                  <span className="text-sm">بداية الشهر الهجري</span>
+                </div>
               </div>
             </div>
           </div>
@@ -449,40 +354,6 @@ const CalendarPage: React.FC = () => {
                   );
                 })}
               </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Hijri-Gregorian Calendar Table */}
-        <div className="mt-8">
-          <div className="card">
-            <h3 className="text-lg font-medium mb-4">جدول التقويم الهجري والميلادي</h3>
-            
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-gray-50 dark:bg-gray-800">
-                    <th className="p-2 text-right">التاريخ الهجري</th>
-                    <th className="p-2 text-right">اليوم</th>
-                    <th className="p-2 text-right">التاريخ الميلادي</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {hijriCalendarData.length > 0 && hijriCalendarData[0].daysMapping.slice(0, 10).map((day, index) => (
-                    <tr key={index} className="border-b border-gray-100 dark:border-gray-800">
-                      <td className="p-2">{day.hijriDay}/{hijriCalendarData[0].hijriMonth}/{hijriCalendarData[0].hijriYear}</td>
-                      <td className="p-2">{day.weekDay}</td>
-                      <td className="p-2">{day.gregorianDate.split('-').reverse().join('/')}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-800 dark:text-gray-700">
-                * بيانات التقويم مستمدة من حسابات فلكية دقيقة وقد تختلف عن الرؤية الشرعية للهلال
-              </p>
             </div>
           </div>
         </div>

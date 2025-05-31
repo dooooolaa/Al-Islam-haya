@@ -1,25 +1,61 @@
-import * as React from "react"
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-export function cn(...classes: any[]): string {
-  return classes.filter(Boolean).join(" ")
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength) + '...';
 }
 
 export function formatNumber(num: number): string {
-  const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-  return num.toString().replace(/[0-9]/g, (match) => arabicNumerals[parseInt(match)]);
+  const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  return num.toString().replace(/\d/g, match => arabicDigits[parseInt(match)]);
 }
 
-export async function copyToClipboard(text: string): Promise<boolean> {
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch (err) {
-    console.error('Failed to copy text: ', err);
-    return false;
-  }
+export function copyToClipboard(text: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text)
+        .then(() => resolve(true))
+        .catch(() => resolve(false));
+    } else {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        resolve(true);
+      } catch (err) {
+        resolve(false);
+      }
+      
+      document.body.removeChild(textArea);
+    }
+  });
 }
 
 export function generateShareLink(path: string): string {
-  const baseUrl = window.location.origin;
-  return `${baseUrl}${path}`;
+  return `${window.location.origin}${path}`;
 }
+
+
+// Function to format time in seconds to MM:SS format
+export function formatTime(seconds: number): string {
+  if (isNaN(seconds) || seconds < 0) {
+    return '00:00';
+  }
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
+
