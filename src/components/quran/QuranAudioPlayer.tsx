@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { reciters } from '../../data/reciters';
+import { reciters } from '../../data/azkar/reciters';
 
 export default function QuranAudioPlayer() {
   const [selectedReciter, setSelectedReciter] = useState(reciters[0]);

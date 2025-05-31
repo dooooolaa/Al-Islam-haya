@@ -2,16 +2,16 @@ import * as React from "react"
 
 import { cn } from "../../lib/utils"
 
+// Card component now primarily relies on the base `.card` style defined in index.css
+// It allows className overrides for specific background/border colors applied in parent components (like HomePage)
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "rounded-lg border border-[#2b3138] bg-[#615151] text-[#262931] shadow-sm dark:border-[#334155] dark:bg-[#1d1e21] dark:text-[#446149]",
-      className
-    )}
+    // Apply the base card style from index.css and allow overrides
+    className={cn("card", className)} 
     {...props}
   />
 ))
@@ -23,7 +23,8 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    // Standard padding, adjust if needed based on reference visual
+    className={cn("flex flex-col space-y-1.5 p-6", className)} 
     {...props}
   />
 ))
@@ -35,8 +36,9 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
+    // Use reference text colors for titles
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight text-[#262931] dark:text-[#446149]",
+      "text-lg font-semibold leading-none tracking-tight text-ref-light-text-hero dark:text-ref-dark-text", 
       className
     )}
     {...props}
@@ -50,7 +52,8 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-[#262931] dark:text-[#446149]", className)}
+    // Use reference text colors for descriptions/secondary text
+    className={cn("text-sm text-ref-light-text-nav dark:text-ref-dark-text-nav", className)} 
     {...props}
   />
 ))
@@ -60,7 +63,8 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  // Standard padding, adjust if needed
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} /> 
 ))
 CardContent.displayName = "CardContent"
 
@@ -70,10 +74,12 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
+    // Standard padding, adjust if needed
+    className={cn("flex items-center p-6 pt-0", className)} 
     {...props}
   />
 ))
 CardFooter.displayName = "CardFooter"
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+

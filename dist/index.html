@@ -1,18 +1,51 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/islam-logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="الإسلام حياة - موقع إسلامي شامل للقرآن والحديث والأذكار والأدعية" />
+
+    <!-- خطوط Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Inter:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <title>الإسلام حياة | Islam is Life</title>
-    <script type="module" crossorigin src="/assets/index-mW_aRoUn.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CjuGFHKl.css">
+    <script type="module" crossorigin src="/assets/index-B0J8RG16.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-exmdko-L.css">
   </head>
-  <body class="font-sans bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text">
+  <body class="font-sans bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text transition-colors duration-300">
+
+    <!-- زر تبديل الوضع -->
+    <div class="fixed top-4 left-4 z-50">
+      <button id="themeToggle" class="btn btn-outline">
+        🌙 تبديل الوضع
+      </button>
+    </div>
+
     <div id="root"></div>
+
+    <!-- السكربت الرئيسي للموقع -->
+
+    <!-- سكربت تبديل الوضع الليلي/النهاري -->
+    <script>
+      const themeToggle = document.getElementById('themeToggle');
+      themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      });
+
+      // التحميل المسبق من localStorage
+      window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      });
+    </script>
+
   </body>
 </html>
