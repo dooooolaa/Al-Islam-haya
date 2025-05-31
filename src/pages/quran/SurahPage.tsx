@@ -615,7 +615,7 @@ const SurahPage = () => {
             <button
               onClick={playSurah}
               disabled={!surahAudioAvailable || audioLoading}
-              className="p-3 bg-yellow-500 text-gray-900 rounded-full hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mx-2 shadow-lg"
+              className="p-3 bg-gray-500 text-gray-900 rounded-full hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mx-2 shadow-lg"
               aria-label={isPlaying ? 'إيقاف مؤقت' : 'تشغيل'}
             >
               {audioLoading ? (
