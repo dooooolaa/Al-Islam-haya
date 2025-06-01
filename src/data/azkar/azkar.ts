@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Repeat, Copy, RefreshCw, Volume2 } from 'lucide-react';
 import { copyToClipboard } from '../../lib/utils';
-import { azkar, categories as azkarCategories } from '../../data/azkar/azkar';
 
 interface Dhikr {
   id: string;
@@ -12,6 +11,20 @@ interface Dhikr {
   audio?: string;
   explanation?: string;
 }
+
+// البيانات الأساسية للأذكار
+const azkar = [
+  // يمكنك إضافة الأذكار الأساسية هنا
+  // مثال:
+  {
+    id: 'morning-1',
+    text: 'أعوذ بالله من الشيطان الرجيم',
+    category: 'أذكار الصباح',
+    repeat: 3,
+    explanation: 'هذا الذكر للتحصين من الشيطان'
+  },
+  // المزيد من الأذكار...
+];
 
 const categoryMap = {
   'أذكار الصباح والمساء': 'morningEvening',
@@ -33,7 +46,7 @@ const organizeAdhkarByCategory = () => {
   
   // إضافة الأذكار الأساسية
   azkar.forEach(zikr => {
-    const categoryKey = categoryMap[zikr.category] || 'misc';
+    const categoryKey = categoryMap[zikr.category as keyof typeof categoryMap] || 'misc';
     
     if (!result[categoryKey]) {
       result[categoryKey] = [];
@@ -54,7 +67,7 @@ const organizeAdhkarByCategory = () => {
     result['misc'] = [];
   }
 
-  result['misc'].push(
+  const miscDuas = [
     {
       id: 'dua-1',
       text: "اللَّهُمَّ اجْعَلْنَا مِنْ عَفَوْتَ وَرَضِيتَ عَنْهُمْ وَغَفَرْتَ لَهُمْ وَاسْتَجَبْتَ دُعَائِهِمْ وَكَتَبْتَ لَهُمُ الْجَنَّةَ",
@@ -83,7 +96,9 @@ const organizeAdhkarByCategory = () => {
       repeat: 1,
       explanation: "هذا الدعاء يطلب من الله الحماية والرعاية للقلب والفكر من كل شر، ويؤكد على قدرة الله العظيمة التي لا تعجز عن شيء في الأرض ولا في السماء. كما يشير إلى سماع الله للدعاء وقبوله."
     }
-  );
+  ];
+
+  result['misc'] = [...result['misc'], ...miscDuas];
   
   return result;
 };
@@ -128,10 +143,10 @@ const AdhkarPage = () => {
   };
 
   const handleCopyDhikr = async (text: string) => {
-    const success = await copyToClipboard(text);
-    if (success) {
+    try {
+      await navigator.clipboard.writeText(text);
       alert('تم نسخ الذكر بنجاح');
-    } else {
+    } catch (err) {
       alert('فشل في نسخ الذكر');
     }
   };
@@ -183,8 +198,8 @@ const AdhkarPage = () => {
               onClick={() => handleCategoryChange(category.id)}
               className={`px-4 py-2 m-1 rounded-md font-medium transition-colors ${
                 activeCategory === category.id
-                  ? 'bg-light-accent dark:bg-dark-accent text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
               {category.name}
@@ -200,59 +215,59 @@ const AdhkarPage = () => {
           transition={{ delay: 0.2 }}
         >
           {adhkarData[activeCategory]?.map((dhikr) => (
-            <div key={dhikr.id} className="card hover:shadow-lg transition-all duration-300">
+            <div key={dhikr.id} className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <div className="mb-4">
-                <p className="text-xl leading-relaxed font-quran">{dhikr.text}</p>
+                <p className="text-xl leading-relaxed text-right">{dhikr.text}</p>
               </div>
               
               {dhikr.explanation && (
-                <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
-                  <p className="text-gray-600 dark:text-gray-400">{dhikr.explanation}</p>
+                <div className="mb-4 p-3 bg-gray-50 rounded-md">
+                  <p className="text-gray-600">{dhikr.explanation}</p>
                 </div>
               )}
               
-              <div className="flex flex-wrap items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+              <div className="flex flex-wrap items-center justify-between pt-4 border-t border-gray-200">
                 <div className="flex items-center">
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-600">
                     {dhikr.category}
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-4 space-x-reverse">
+                <div className="flex items-center space-x-4">
                   {dhikr.audio && (
                     <button
                       onClick={() => handlePlayAudio(dhikr.audio!, dhikr.id)}
                       className={`p-2 rounded-full ${
                         audioPlaying === dhikr.id
-                          ? 'bg-light-accent dark:bg-dark-accent text-white'
-                          : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
-                      } transition-theme`}
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-100 hover:bg-gray-200'
+                      }`}
                       aria-label="تشغيل الصوت"
                     >
-                      <Volume2 size={20} className={audioPlaying === dhikr.id ? 'text-white' : 'text-gray-600 dark:text-gray-400'} />
+                      <Volume2 size={20} />
                     </button>
                   )}
                   
                   <button
                     onClick={() => handleCopyDhikr(dhikr.text)}
-                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme"
+                    className="p-2 rounded-full bg-gray-100 hover:bg-gray-200"
                     aria-label="نسخ"
                   >
-                    <Copy size={20} className="text-gray-600 dark:text-gray-400" />
+                    <Copy size={20} />
                   </button>
                   
-                  <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+                  <div className="flex items-center bg-gray-100 rounded-lg overflow-hidden">
                     <button
                       onClick={() => handleIncrementCounter(dhikr.id, dhikr.repeat)}
                       disabled={(counters[dhikr.id] || 0) >= dhikr.repeat}
-                      className={`p-2 transition-theme ${
+                      className={`p-2 ${
                         (counters[dhikr.id] || 0) >= dhikr.repeat
-                          ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed'
-                          : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+                          ? 'bg-gray-200 cursor-not-allowed'
+                          : 'hover:bg-gray-200'
                       }`}
                       aria-label="عد"
                     >
-                      <Repeat size={20} className="text-gray-600 dark:text-gray-400" />
+                      <Repeat size={20} />
                     </button>
                     
                     <div className="px-3 font-medium">
@@ -261,10 +276,10 @@ const AdhkarPage = () => {
                     
                     <button
                       onClick={() => handleResetCounter(dhikr.id)}
-                      className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme"
+                      className="p-2 hover:bg-gray-200"
                       aria-label="إعادة"
                     >
-                      <RefreshCw size={20} className="text-gray-600 dark:text-gray-400" />
+                      <RefreshCw size={20} />
                     </button>
                   </div>
                 </div>
@@ -274,7 +289,7 @@ const AdhkarPage = () => {
 
           {(!adhkarData[activeCategory] || adhkarData[activeCategory].length === 0) && (
             <div className="text-center py-10">
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-lg text-gray-600">
                 لا توجد أذكار في هذه الفئة حالياً
               </p>
             </div>
