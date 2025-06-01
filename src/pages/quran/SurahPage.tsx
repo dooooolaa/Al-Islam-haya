@@ -54,7 +54,7 @@ const reciters: Reciter[] = [
     id: 'alafasy',
     name: 'مشاري راشد العفاسي',
     audioUrl: 'https://server7.mp3quran.net/afs/',
-    image: '/path/to/alafasy/image.jpg', // Placeholder - Update with actual path
+    image: 'https://commons.wikimedia.org/wiki/File:Мишари_Рашид.jpg', // Wikimedia Commons image URL
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -62,7 +62,7 @@ const reciters: Reciter[] = [
     id: 'minshawi_mojawwad',
     name: 'محمد صديق المنشاوي (مجود)',
     audioUrl: 'https://server8.mp3quran.net/minsh/',
-    image: '/path/to/minshawi/image.jpg', // Placeholder - Update with actual path
+    image: 'https://commons.wikimedia.org/wiki/File:Elminshwey.jpg', // Wikimedia Commons image URL
     type: 'direct',
     fileExtension: '.mp3'
   },
