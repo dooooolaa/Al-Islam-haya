@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Repeat, Copy, RefreshCw, Volume2 } from 'lucide-react';
 import { copyToClipboard } from '../../lib/utils';
