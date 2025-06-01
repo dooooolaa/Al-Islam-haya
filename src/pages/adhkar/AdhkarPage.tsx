@@ -8,7 +8,7 @@ interface Dhikr {
   id: string;
   text: string;
   category: string;
-  repeat: number;
+  count: number;
   audio?: string;
   explanation?: string;
 }
@@ -42,7 +42,7 @@ const organizeAdhkarByCategory = () => {
       id: zikr.id,
       text: zikr.text,
       category: zikr.category,
-      repeat: zikr.repeat,
+      count: zikr.count,
       audio: zikr.audio,
       explanation: zikr.explanation
     });
@@ -76,10 +76,10 @@ const AdhkarPage = () => {
     setActiveCategory(categoryId);
   };
 
-  const handleIncrementCounter = (dhikrId: string, maxRepeat: number) => {
+  const handleIncrementCounter = (dhikrId: string, maxCount: number) => {
     setCounters(prev => {
       const currentCount = prev[dhikrId] || 0;
-      if (currentCount < maxRepeat) {
+      if (currentCount < maxCount) {
         return { ...prev, [dhikrId]: currentCount + 1 };
       }
       return prev;
@@ -206,10 +206,10 @@ const AdhkarPage = () => {
                   
                   <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
                     <button
-                      onClick={() => handleIncrementCounter(dhikr.id, dhikr.repeat)}
-                      disabled={(counters[dhikr.id] || 0) >= dhikr.repeat}
+                      onClick={() => handleIncrementCounter(dhikr.id, dhikr.count)}
+                      disabled={(counters[dhikr.id] || 0) >= dhikr.count}
                       className={`p-2 transition-theme ${
-                        (counters[dhikr.id] || 0) >= dhikr.repeat
+                        (counters[dhikr.id] || 0) >= dhikr.count
                           ? 'bg-gray-200 dark:bg-gray-700 cursor-not-allowed'
                           : 'hover:bg-gray-200 dark:hover:bg-gray-700'
                       }`}
@@ -219,7 +219,7 @@ const AdhkarPage = () => {
                     </button>
                     
                     <div className="px-3 font-medium">
-                      {counters[dhikr.id] || 0}/{dhikr.repeat}
+                      {counters[dhikr.id] || 0}/{dhikr.count}
                     </div>
                     
                     <button
