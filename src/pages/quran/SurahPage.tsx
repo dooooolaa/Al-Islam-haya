@@ -53,24 +53,24 @@ const reciters: Reciter[] = [
   {
     id: 'alafasy',
     name: 'مشاري راشد العفاسي',
-    audioUrl: 'https://server8.mp3quran.net/afs/', // Corrected audio URL from mp3quran.net
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg', // Direct Wikimedia Commons image URL
+    audioUrl: 'https://server8.mp3quran.net/afs/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
   {
     id: 'minshawi_mojawwad',
     name: 'محمد صديق المنشاوي (مجود)',
-    audioUrl: 'https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/', // Corrected audio URL from mp3quran.net
-    image: 'https://i1.sndcdn.com/artworks-hyUqzJhQW7zyqkI0-k03iDg-t500x500.jpg', // Direct Wikimedia Commons image URL
+    audioUrl: 'https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/',
+    image: 'https://i1.sndcdn.com/artworks-hyUqzJhQW7zyqkI0-k03iDg-t500x500.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
   {
-    id: 'minshawi_mortal',
+    id: 'minshawi_murattal',
     name: 'محمد صديق المنشاوي (مرتل)',
-    audioUrl: 'https://server10.mp3quran.net/minsh/Almusshaf-Al-Mojawwad/', // Corrected audio URL from mp3quran.net
-    image: 'https://server10.mp3quran.net/minsh', // Direct Wikimedia Commons image URL
+    audioUrl: 'https://server10.mp3quran.net/minsh/',
+    image: 'https://i1.sndcdn.com/artworks-hyUqzJhQW7zyqkI0-k03iDg-t500x500.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
