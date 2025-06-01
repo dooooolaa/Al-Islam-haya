@@ -762,6 +762,13 @@ const SurahPage = () => {
             </div>
           </div>
             
+          {/* Bismillah */}
+          {surah.number !== 1 && surah.number !== 9 && (
+            <p className="text-center quran-text text-2xl my-6 text-yellow-400 font-arabic">
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </p>
+          )}
+          
           {/* Ayah Text */}
           <div className="flex flex-wrap gap-x-2 gap-y-4 text-justify leading-loose font-arabic" style={{ fontSize: `${fontSize}px` }}>
             {surah.ayahs.map((ayah) => (
