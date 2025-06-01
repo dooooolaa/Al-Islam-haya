@@ -4,6 +4,7 @@ import { Compass, AlertTriangle, LocateFixed, Info } from 'lucide-react';
 import { Coordinates } from 'adhan';
 import LoadingSpinner from '../../components/shared/LoadingSpinner';
 import ErrorMessage from '../../components/shared/ErrorMessage';
+import React from 'react';
 
 interface QiblaDirection {
   latitude: number;
@@ -23,61 +24,60 @@ const QiblaPage = () => {
   const compassRef = useRef<HTMLDivElement>(null);
   const qiblaArrowRef = useRef<HTMLDivElement>(null);
 
+  const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+    let heading: number | null = null;
+    
+    if ('webkitCompassHeading' in event) {
+      // iOS devices
+      heading = (event as any).webkitCompassHeading;
+    } else if (event.absolute && event.alpha !== null) {
+      // Android devices
+      heading = 360 - event.alpha;
+    } else if (event.alpha !== null) {
+      // Fallback for other devices
+      heading = 360 - event.alpha;
+    }
+
+    if (heading !== null) {
+      setCompassHeading(heading);
+      
+      if (compassRef.current) {
+        // Rotate the compass to show true north
+        compassRef.current.style.transform = `rotate(${-heading}deg)`; // Rotate opposite to heading
+      }
+      
+      // Update Qibla arrow if we have qibla data
+      if (qiblaData && qiblaArrowRef.current) {
+        // Calculate the relative angle to Qibla based on device orientation
+        const relativeQiblaAngle = qiblaData.qiblaDirection - heading;
+        qiblaArrowRef.current.style.transform = `rotate(${relativeQiblaAngle}deg)`;
+      }
+    }
+  };
+
+  const requestOrientationPermission = async () => {
+    if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+      try {
+        const permission = await (DeviceOrientationEvent as any).requestPermission();
+        if (permission === 'granted') {
+          setPermissionDenied(false);
+          window.addEventListener('deviceorientationabsolute', handleDeviceOrientation, true);
+          window.addEventListener('deviceorientation', handleDeviceOrientation, true);
+        } else {
+          setPermissionDenied(true);
+        }
+      } catch (err) {
+        console.error('Error requesting device orientation permission:', err);
+        setPermissionDenied(true);
+      }
+    }
+  };
+
   useEffect(() => {
     // Check if device has orientation sensors
     const hasOrientationSensor = 'DeviceOrientationEvent' in window;
     setDeviceHasCompass(hasOrientationSensor);
     
-    // Function to handle device orientation events
-    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
-      let heading: number | null = null;
-      
-      if ('webkitCompassHeading' in event) {
-        // iOS devices
-        heading = (event as any).webkitCompassHeading;
-      } else if (event.absolute && event.alpha !== null) {
-        // Android devices
-        heading = 360 - event.alpha;
-      } else if (event.alpha !== null) {
-        // Fallback for other devices
-        heading = 360 - event.alpha;
-      }
-
-      if (heading !== null) {
-        setCompassHeading(heading);
-        
-        if (compassRef.current) {
-          // Rotate the compass to show true north
-          compassRef.current.style.transform = `rotate(${-heading}deg)`; // Rotate opposite to heading
-        }
-        
-        // Update Qibla arrow if we have qibla data
-        if (qiblaData && qiblaArrowRef.current) {
-          // Calculate the relative angle to Qibla based on device orientation
-          const relativeQiblaAngle = qiblaData.qiblaDirection - heading;
-          qiblaArrowRef.current.style.transform = `rotate(${relativeQiblaAngle}deg)`;
-        }
-      }
-    };
-
-    const requestOrientationPermission = async () => {
-      if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
-        try {
-          const permission = await (DeviceOrientationEvent as any).requestPermission();
-          if (permission === 'granted') {
-            setPermissionDenied(false);
-            window.addEventListener('deviceorientationabsolute', handleDeviceOrientation, true);
-            window.addEventListener('deviceorientation', handleDeviceOrientation, true);
-          } else {
-            setPermissionDenied(true);
-          }
-        } catch (err) {
-          console.error('Error requesting device orientation permission:', err);
-          setPermissionDenied(true);
-        }
-      }
-    };
-
     const getLocationAndOrientation = async () => {
        // Request orientation permission first (important for iOS)
       if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
