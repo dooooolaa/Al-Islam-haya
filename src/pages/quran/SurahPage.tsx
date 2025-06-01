@@ -336,7 +336,11 @@ const SurahPage = () => {
     const formattedSurahNumber = surahNum.toString().padStart(3, '0');
     
     // Handle different reciter URL formats
-    if (reciterId === 'minshawi_mojawwad') {
+    if (reciterId === 'Albanna_mojawwad') {
+      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+    } else if (reciterId === 'Albanna_murattal') {
+      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+    } else if (reciterId === 'minshawi_mojawwad') {
       return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
     } else if (reciterId === 'minshawi_murattal') {
       return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
