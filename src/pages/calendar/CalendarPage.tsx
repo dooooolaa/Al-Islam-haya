@@ -100,18 +100,21 @@ const CalendarPage: React.FC = () => {
     setEvents(islamicEvents);
   };
 
-  const getEventsForDate = (date: Date, hijriDate: any): IslamicEvent[] => {
+  const getEventsForDate = (date: Date, hijriDate: HijriDate): IslamicEvent[] => {
     const gregorianMonth = (date.getMonth() + 1).toString().padStart(2, '0');
     const gregorianDay = date.getDate().toString().padStart(2, '0');
     const gregorianDateStr = `${gregorianMonth}-${gregorianDay}`;
     
     const hijriMonth = hijriDate.getMonth().toString().padStart(2, '0');
     const hijriDay = hijriDate.getDate().toString().padStart(2, '0');
-    const hijriDateStr = `${hijriMonth}-${hijriDay}`;
+    const hijriYear = hijriDate.getFullYear();
     
     return events.filter(event => 
       (event.type === 'gregorian' && event.date === gregorianDateStr) ||
-      (event.type === 'hijri' && event.date === hijriDateStr)
+      (event.type === 'hijri' && 
+       event.date.split('-')[0] === hijriMonth && 
+       event.date.split('-')[1] === hijriDay
+      )
     );
   };
 
@@ -150,7 +153,7 @@ const CalendarPage: React.FC = () => {
     const daysInMonth = getDaysInMonth(year, month);
     const firstDayOfMonth = getFirstDayOfMonth(year, month);
     
-    const days = [];
+    const days: React.ReactNode[] = [];
     const today = new Date();
     
     // Add empty cells for days before the first day of the month
@@ -228,6 +231,7 @@ const CalendarPage: React.FC = () => {
               <button 
                 onClick={handlePrevMonth}
                 className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
+                aria-label="Previous month"
               >
                 <ChevronRight size={20} />
               </button>
@@ -244,6 +248,7 @@ const CalendarPage: React.FC = () => {
               <button 
                 onClick={handleNextMonth}
                 className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-theme"
+                aria-label="Next month"
               >
                 <ChevronLeft size={20} />
               </button>
