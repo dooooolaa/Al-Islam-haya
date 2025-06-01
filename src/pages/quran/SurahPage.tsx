@@ -51,6 +51,38 @@ const reciters: Reciter[] = [
     fileExtension: '.mp3'
   },
   {
+    id: 'Albanna_mojawwad',
+    name: 'محمود علي البنا (مجود)',
+    audioUrl: 'https://server8.mp3quran.net/bna/Almusshaf-Al-Mojawwad/',
+    image: 'https://watanimg.elwatannews.com/image_archive/original_lower_quality/5551145621689862618.jpg',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'Albanna_murattal',
+    name: 'محمود علي البنا (مرتل)',
+    audioUrl: 'https://server8.mp3quran.net/afs/',
+    image: 'https://server8.mp3quran.net/bna',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'Al-Dosari',
+    name: 'ياسر الدوسري',
+    audioUrl: 'https://server11.mp3quran.net/yasser',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRug-KW7tlny6-ViMy01Ql1Ujxrjb4L83dYZw&s',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'Bader Alturki',
+    name: 'بدر التركي',
+    audioUrl: 'https://server10.mp3quran.net/bader/Rewayat-Hafs-A-n-Assem/',
+    image: 'https://api2.quran-pro.com/images/badr-bin-mohammed-al-turki/badr-bin-mohammed-al-turki-medium.webp?version=1686737768846',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
     id: 'alafasy',
     name: 'مشاري راشد العفاسي',
     audioUrl: 'https://server8.mp3quran.net/afs/',
