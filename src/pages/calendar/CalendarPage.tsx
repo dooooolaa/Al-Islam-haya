@@ -60,12 +60,6 @@ const CalendarPage: React.FC = () => {
         type: 'hijri'
       },
       {
-        name: 'ليلة الإسراء والمعراج',
-        date: '07-27', // Rajab 27
-        description: 'ذكرى رحلة النبي محمد من مكة إلى القدس ثم إلى السماء',
-        type: 'hijri'
-      },
-      {
         name: 'بداية شهر رمضان',
         date: '09-01', // Ramadan 1
         description: 'بداية شهر الصيام المبارك',
