@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Repeat, Copy, RefreshCw, Volume2 } from 'lucide-react';
 import { copyToClipboard } from '../../lib/utils';
-import { azkar, categories as azkarCategories } from '../../data/azkar/azkar';
+import { azkarData as azkar } from '../../data/azkar/azkar';
 
 interface Dhikr {
   id: string;
