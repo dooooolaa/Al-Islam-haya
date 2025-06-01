@@ -59,14 +59,6 @@ const reciters: Reciter[] = [
     fileExtension: '.mp3'
   },
   {
-    id: 'Albanna_murattal',
-    name: 'محمود علي البنا (مرتل)',
-    audioUrl: 'https://server8.mp3quran.net/bna',
-    image: 'https://watanimg.elwatannews.com/image_archive/original_lower_quality/5551145621689862618.jpg',
-    type: 'direct',
-    fileExtension: '.mp3'
-  },
-  {
     id: 'Al-Dosari',
     name: 'ياسر الدوسري',
     audioUrl: 'https://server11.mp3quran.net/yasser',
