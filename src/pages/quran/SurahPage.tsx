@@ -62,7 +62,7 @@ const reciters: Reciter[] = [
     id: 'minshawi_mojawwad',
     name: 'محمد صديق المنشاوي (مجود)',
     audioUrl: 'https://server8.mp3quran.net/minsh/',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Elminshwey.jpg',
+    image: 'https://i1.sndcdn.com/artworks-hyUqzJhQW7zyqkI0-k03iDg-t500x500.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
