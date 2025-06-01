@@ -57,7 +57,7 @@ const categories = [
   { id: 'morning', name: 'أذكار الصباح' },
   { id: 'evening', name: 'أذكار المساء' },
   { id: 'morningEvening', name: 'أذكار الصباح والمساء' },
-  { id: 'prayer', name: 'أذكار الصلاة' },
+  { id: 'prayer', name: 'أذكار ما بعد الصلاة' },
   { id: 'sleep', name: 'أذكار النوم' },
   { id: 'wakeup', name: 'أذكار الاستيقاظ' },
   { id: 'morningEveningDua', name: 'أدعية الصباح والمساء' },
