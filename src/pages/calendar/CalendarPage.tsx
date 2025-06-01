@@ -12,7 +12,7 @@ interface IslamicEvent {
 
 const CalendarPage: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [hijriDate, setHijriDate] = useState<any>(null);
+  const [hijriDate, setHijriDate] = useState<HijriDate | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [events, setEvents] = useState<IslamicEvent[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<IslamicEvent[]>([]);
@@ -180,11 +180,6 @@ const CalendarPage: React.FC = () => {
           onClick={() => handleDateClick(day)}
         >
           <span>{day}</span>
-          {hijriForDay.getDate() === 1 && (
-            <div className="absolute -top-1 -right-1">
-              <Moon size={12} className="text-light-accent dark:text-dark-accent" />
-            </div>
-          )}
           {hasEvents && (
             <div className="absolute -bottom-1 w-1.5 h-1.5 rounded-full bg-light-accent dark:bg-dark-accent"></div>
           )}
@@ -205,7 +200,7 @@ const CalendarPage: React.FC = () => {
       'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
     ];
     
-    return `${hijri.getDate()} ${hijriMonths[hijri.getMonth() - 1]} ${hijri.getFullYear()} هـ`;
+    return `${hijri.getDate()} ${hijriMonths[hijri.getMonth() - 1]}`;
   };
 
   const formatGregorianDate = (date: Date): string => {
