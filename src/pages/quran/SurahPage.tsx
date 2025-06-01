@@ -46,23 +46,23 @@ const reciters: Reciter[] = [
     id: 'kurdi',
     name: 'رعد محمد الكردي',
     audioUrl: 'https://server6.mp3quran.net/kurdi/',
-    image: raadAlkurdyImg, // Use imported image
+    image: raadAlkurdyImg,
     type: 'direct',
     fileExtension: '.mp3'
   },
   {
     id: 'alafasy',
     name: 'مشاري راشد العفاسي',
-    audioUrl: 'https://server7.mp3quran.net/afs/', // Corrected audio URL from mp3quran.net
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg', // Direct Wikimedia Commons image URL
+    audioUrl: 'https://server7.mp3quran.net/afs/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
   {
     id: 'minshawi_mojawwad',
     name: 'محمد صديق المنشاوي (مجود)',
-    audioUrl: 'https://server8.mp3quran.net/minsh/', // Corrected audio URL from mp3quran.net
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Elminshwey.jpg', // Direct Wikimedia Commons image URL
+    audioUrl: 'https://server8.mp3quran.net/minsh/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Elminshwey.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -70,7 +70,7 @@ const reciters: Reciter[] = [
     id: 'sudais',
     name: 'عبد الرحمن السديس',
     audioUrl: 'https://server11.mp3quran.net/sds/',
-    image: '', // Placeholder
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Abdurrahman_As-Sudais.jpg/800px-Abdurrahman_As-Sudais.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -78,7 +78,7 @@ const reciters: Reciter[] = [
     id: 'shuraim',
     name: 'سعود الشريم',
     audioUrl: 'https://server7.mp3quran.net/shur/',
-    image: '', // Placeholder
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Saud_ash-Shuraim.jpg/800px-Saud_ash-Shuraim.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -86,7 +86,7 @@ const reciters: Reciter[] = [
     id: 'maher',
     name: 'ماهر المعيقلي',
     audioUrl: 'https://server12.mp3quran.net/maher/',
-    image: '', // Placeholder
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Maher_Al_Muaiqly.jpg/800px-Maher_Al_Muaiqly.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -94,7 +94,7 @@ const reciters: Reciter[] = [
     id: 'abdulbasit',
     name: 'عبد الباسط عبد الصمد',
     audioUrl: 'https://server7.mp3quran.net/basit/',
-    image: '', // Placeholder
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Abdul_Basit_Abdus_Samad.jpg/800px-Abdul_Basit_Abdus_Samad.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -102,7 +102,7 @@ const reciters: Reciter[] = [
     id: 'husary_mojawwad',
     name: 'محمود خليل الحصري (مجود)',
     audioUrl: 'https://server13.mp3quran.net/husr/',
-    image: '', // Placeholder
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Mahmoud_Khalil_Al-Husary.jpg/800px-Mahmoud_Khalil_Al-Husary.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -110,11 +110,50 @@ const reciters: Reciter[] = [
     id: 'ghamdi',
     name: 'سعد الغامدي',
     audioUrl: 'https://server7.mp3quran.net/s_gmd/',
-    image: '', // Placeholder
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Saad_Al-Ghamdi.jpg/800px-Saad_Al-Ghamdi.jpg',
     type: 'direct',
     fileExtension: '.mp3'
   },
-  // Add other reciters from the original list if needed
+  {
+    id: 'ghamidi',
+    name: 'سعد الغامدي (تلاوة خاشعة)',
+    audioUrl: 'https://server7.mp3quran.net/ghamdi/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Saad_Al-Ghamdi.jpg/800px-Saad_Al-Ghamdi.jpg',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'mishary_rashid',
+    name: 'مشاري راشد العفاسي (تلاوة خاشعة)',
+    audioUrl: 'https://server7.mp3quran.net/misha/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/24/%D0%9C%D0%B8%D1%88%D0%B0%D1%80%D0%B8_%D0%A0%D0%B0%D1%88%D0%B8%D0%B4.jpg',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'abdulbasit_murattal',
+    name: 'عبد الباسط عبد الصمد (مرتل)',
+    audioUrl: 'https://server7.mp3quran.net/basit_murattal/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Abdul_Basit_Abdus_Samad.jpg/800px-Abdul_Basit_Abdus_Samad.jpg',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'husary_murattal',
+    name: 'محمود خليل الحصري (مرتل)',
+    audioUrl: 'https://server13.mp3quran.net/husr_murattal/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Mahmoud_Khalil_Al-Husary.jpg/800px-Mahmoud_Khalil_Al-Husary.jpg',
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'minshawi_murattal',
+    name: 'محمد صديق المنشاوي (مرتل)',
+    audioUrl: 'https://server8.mp3quran.net/minsh_murattal/',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Elminshwey.jpg',
+    type: 'direct',
+    fileExtension: '.mp3'
+  }
 ];
 
 const SurahPage = () => {
