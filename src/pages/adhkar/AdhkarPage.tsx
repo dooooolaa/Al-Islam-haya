@@ -19,7 +19,7 @@ const categoryMap = {
   'أذكار المساء': 'evening',
   'أذكار النوم': 'sleep',
   'أذكار الاستيقاظ': 'wakeup',
-  'أذكار الصلاة': 'prayer',
+  'أذكار ما بعد الصلاة': 'prayer',
   'أدعية الصباح والمساء': 'morningEveningDua',
   'أدعية الكرب': 'distress',
   'أدعية الهم والحزن': 'sadness',
