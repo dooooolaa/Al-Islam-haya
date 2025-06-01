@@ -100,22 +100,39 @@ const CalendarPage: React.FC = () => {
     setEvents(islamicEvents);
   };
 
-  const getEventsForDate = (date: Date, hijriDate: HijriDate): IslamicEvent[] => {
+  const getEventsForDate = (date: Date, hijriDateForDay: HijriDate): IslamicEvent[] => {
     const gregorianMonth = (date.getMonth() + 1).toString().padStart(2, '0');
     const gregorianDay = date.getDate().toString().padStart(2, '0');
     const gregorianDateStr = `${gregorianMonth}-${gregorianDay}`;
     
-    const hijriMonth = hijriDate.getMonth().toString().padStart(2, '0');
-    const hijriDay = hijriDate.getDate().toString().padStart(2, '0');
-    const hijriYear = hijriDate.getFullYear();
-    
-    return events.filter(event => 
-      (event.type === 'gregorian' && event.date === gregorianDateStr) ||
-      (event.type === 'hijri' && 
-       event.date.split('-')[0] === hijriMonth && 
-       event.date.split('-')[1] === hijriDay
-      )
-    );
+    // Get the current Hijri year from the date being displayed
+    const currentHijriYear = hijriDateForDay.getFullYear();
+
+    return events.filter(event => {
+      if (event.type === 'gregorian') {
+        return event.date === gregorianDateStr;
+      } else if (event.type === 'hijri') {
+        // For Hijri events, calculate their Gregorian date in the current Hijri year
+        try {
+          const eventHijriMonth = parseInt(event.date.split('-')[0], 10);
+          const eventHijriDay = parseInt(event.date.split('-')[1], 10);
+          // Create a HijriDate object for the event in the current year
+          const eventHijriDate = new HijriDate(currentHijriYear, eventHijriMonth - 1, eventHijriDay);
+          // Convert the event's Hijri date to Gregorian and format as MM-DD
+          const eventGregorianDate = eventHijriDate.toGregorian();
+          const eventGregorianMonth = (eventGregorianDate.getMonth() + 1).toString().padStart(2, '0');
+          const eventGregorianDay = eventGregorianDate.getDate().toString().padStart(2, '0');
+          const eventGregorianDateStr = `${eventGregorianMonth}-${eventGregorianDay}`;
+          
+          // Compare with the current day's Gregorian date
+          return gregorianDateStr === eventGregorianDateStr;
+        } catch (e) {
+          console.error('Error calculating event date:', e);
+          return false;
+        }
+      }
+      return false;
+    });
   };
 
   const getDaysInMonth = (year: number, month: number): number => {
