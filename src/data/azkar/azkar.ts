@@ -101,7 +101,7 @@ export const azkarData = [
     text: "اللَّهُمَّ اغْفِرْ لِي، وَارْحَمْنِي، وَعَافِنِي، وَارْزُقْنِي",
     count: 3,
     audio: "https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13765",
-    category: "أذكار متنوعة",
+    category: "أدعية متنوعة",
     explanation: 'دعاء جامع لخيري الدنيا والآخرة، يسأل فيه العبد ربه المغفرة والسعة في الدار والبركة في الرزق'
   },
   {
@@ -109,7 +109,7 @@ export const azkarData = [
     text: "اللَّهُمَّ اجْعَلْنَا مِنْ عَفَوْتَ وَرَضِيتَ عَنْهُمْ وَغَفَرْتَ لَهُمْ وَاسْتَجَبْتَ دُعَائِهِمْ وَكَتَبْتَ لَهُمُ الْجَنَّةَ",
     count: 3,
     audio: "https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13766",
-    category: "أذكار متنوعة",
+    category: "أدعية متنوعة",
     explanation: 'دعاء يجمع بين طلب العفو والرضا والمغفرة واستجابة الدعاء ودخول الجنة'
   },
   {
@@ -190,14 +190,14 @@ export const azkarData = [
     id: '27',
     text: "أَسْتَغْفِرُ اللَّهَ",
     count: 3,
-    category: 'أذكار بعد الصلاة',
+    category: 'أذكار ما بعد الصلاة',
     source: 'إسلام ويب'
   },
   {
     id: '28',
     text: "اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
     count: 1,
-    category: 'أذكار بعد الصلاة',
+    category: 'أذكار ما بعد الصلاة',
     source: 'إسلام ويب'
   },
   {
@@ -261,14 +261,14 @@ export const azkarData = [
     id: '37',
     text: "الْحَمْدُ لِلَّهِ",
     count: 33,
-    category: 'أذكار بعد الصلاة',
+    category: 'أذكار ما بعد الصلاة',
     source: 'إسلام ويب'
   },
   {
     id: '38',
     text: "اللَّهُ أَكْبَرُ",
     count: 33,
-    category: 'أذكار بعد الصلاة',
+    category: 'أذكار ما بعد الصلاة',
     source: 'إسلام ويب'
   },
   {
