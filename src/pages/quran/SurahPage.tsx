@@ -299,8 +299,18 @@ const SurahPage = () => {
       console.error('Reciter or audio info not found for ID:', reciterId);
       return null;
     }
+    
+    // Format surah number with leading zeros
     const formattedSurahNumber = surahNum.toString().padStart(3, '0');
-    return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+    
+    // Handle different reciter URL formats
+    if (reciterId === 'minshawi_mojawwad') {
+      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+    } else if (reciterId === 'minshawi_murattal') {
+      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+    } else {
+      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+    }
   };
 
   const createAndLoadAudio = (surahNum: number): boolean => {
