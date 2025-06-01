@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar as CalendarIcon, ChevronRight, ChevronLeft, Moon } from 'lucide-react';
-import HijriDate from 'hijri-date';
+import { Calendar as CalendarIcon, ChevronRight, ChevronLeft } from 'lucide-react';
+import uq, { UmAlQura } from '@umalqura/core';
 
 interface IslamicEvent {
   name: string;
@@ -12,15 +12,15 @@ interface IslamicEvent {
 
 const CalendarPage: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [hijriDate, setHijriDate] = useState<HijriDate | null>(null);
+  const [hijriDate, setHijriDate] = useState<UmAlQura | any>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [events, setEvents] = useState<IslamicEvent[]>([]);
   const [selectedEvents, setSelectedEvents] = useState<IslamicEvent[]>([]);
 
   useEffect(() => {
-    // Initialize Hijri date
+    // Initialize Hijri date using umalqura
     const today = new Date();
-    const hijri = new HijriDate(today);
+    const hijri = uq(today);
     setHijriDate(hijri);
     
     // Load Islamic events
@@ -29,7 +29,7 @@ const CalendarPage: React.FC = () => {
 
   useEffect(() => {
     if (selectedDate) {
-      const hijriSelected = new HijriDate(selectedDate);
+      const hijriSelected = uq(selectedDate);
       const selectedDateEvents = getEventsForDate(selectedDate, hijriSelected);
       setSelectedEvents(selectedDateEvents);
     } else {
@@ -100,13 +100,13 @@ const CalendarPage: React.FC = () => {
     setEvents(islamicEvents);
   };
 
-  const getEventsForDate = (date: Date, hijriDateForDay: HijriDate): IslamicEvent[] => {
+  const getEventsForDate = (date: Date, hijriDateForDay: UmAlQura): IslamicEvent[] => {
     const gregorianMonth = (date.getMonth() + 1).toString().padStart(2, '0');
     const gregorianDay = date.getDate().toString().padStart(2, '0');
     const gregorianDateStr = `${gregorianMonth}-${gregorianDay}`;
     
     // Get the current Hijri year from the date being displayed
-    const currentHijriYear = hijriDateForDay.getFullYear();
+    const currentHijriYear = hijriDateForDay.hy;
 
     return events.filter(event => {
       if (event.type === 'gregorian') {
@@ -116,10 +116,11 @@ const CalendarPage: React.FC = () => {
         try {
           const eventHijriMonth = parseInt(event.date.split('-')[0], 10);
           const eventHijriDay = parseInt(event.date.split('-')[1], 10);
-          // Create a HijriDate object for the event in the current year
-          const eventHijriDate = new HijriDate(currentHijriYear, eventHijriMonth - 1, eventHijriDay);
-          // Convert the event's Hijri date to Gregorian and format as MM-DD
-          const eventGregorianDate = eventHijriDate.toGregorian();
+          // Create a UmAlQura object for the event in the current year
+          // Month in umalqura is 1-indexed
+          const eventHijriDate = uq(currentHijriYear, eventHijriMonth, eventHijriDay);
+          // Convert the event's Hijri date to Gregorian
+          const eventGregorianDate = eventHijriDate.date; // .date property gives the Gregorian Date object
           const eventGregorianMonth = (eventGregorianDate.getMonth() + 1).toString().padStart(2, '0');
           const eventGregorianDay = eventGregorianDate.getDate().toString().padStart(2, '0');
           const eventGregorianDateStr = `${eventGregorianMonth}-${eventGregorianDay}`;
@@ -181,7 +182,7 @@ const CalendarPage: React.FC = () => {
     // Add cells for each day of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
-      const hijriForDay = new HijriDate(date);
+      const hijriForDay = uq(date);
       const isToday = today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
       const isSelected = selectedDate?.getDate() === day && selectedDate?.getMonth() === month && selectedDate?.getFullYear() === year;
       
@@ -213,14 +214,15 @@ const CalendarPage: React.FC = () => {
   const formatHijriDate = (date: Date): string => {
     if (!hijriDate) return '';
     
-    const hijri = new HijriDate(date);
+    const hijri = uq(date); // Use uq to get UmAlQura object for the given date
     const hijriMonths = [
       'محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني',
       'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان',
       'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
     ];
     
-    return `${hijri.getDate()} ${hijriMonths[hijri.getMonth() - 1]}`;
+    // Format as Day Month (e.g., 24 ذو الحجة)
+    return `${hijri.hd} ${hijriMonths[hijri.hm - 1]}`;
   };
 
   const formatGregorianDate = (date: Date): string => {
