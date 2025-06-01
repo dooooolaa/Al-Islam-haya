@@ -764,47 +764,53 @@ const SurahPage = () => {
             
           {/* Ayah Text */}
           <div className="flex flex-wrap gap-x-2 gap-y-4 text-justify leading-loose font-arabic" style={{ fontSize: `${fontSize}px` }}>
-            {surah.ayahs.map((ayah) => (
-              <div 
-                key={ayah.number} 
-                id={`ayah-${ayah.numberInSurah}`}
-                className={cn(
-                  "inline relative group text-white cursor-pointer",
-                  selectedAyah === ayah.numberInSurah && "bg-yellow-900/30 rounded"
-                )}
-                onClick={() => handleAyahClick(ayah.numberInSurah)}
-              >
-                <span className="quran-text">{ayah.text}</span>
-                {/* Ayah number circle */}
-                <span className="inline-flex items-center justify-center w-7 h-7 text-xs mx-1 rounded-full bg-gray-700 text-yellow-400 font-sans">
-                  {formatNumber(ayah.numberInSurah)}
-                </span>
-                
-                {/* Ayah Actions (Hover) */}
-                <div className="absolute -top-10 right-1/2 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1 space-x-reverse bg-gray-900 rounded-md shadow-lg p-1 border border-gray-700 z-10">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCopyAyah(ayah);
-                    }}
-                    className="p-1.5 rounded-full hover:bg-gray-700 transition-colors text-gray-400 hover:text-white"
-                    aria-label="نسخ"
-                  >
-                    <Copy size={16} />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleShareAyah(ayah);
-                    }}
-                    className="p-1.5 rounded-full hover:bg-gray-700 transition-colors text-gray-400 hover:text-white"
-                    aria-label="مشاركة"
-                  >
-                    <Share2 size={16} />
-                  </button>
+            {surah.ayahs.map((ayah) => {
+              // Skip the first ayah if it is Bismillah
+              if (ayah.numberInSurah === 1 && ayah.text === 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ') {
+                return null;
+              }
+              return (
+                <div 
+                  key={ayah.number} 
+                  id={`ayah-${ayah.numberInSurah}`}
+                  className={cn(
+                    "inline relative group text-white cursor-pointer",
+                    selectedAyah === ayah.numberInSurah && "bg-yellow-900/30 rounded"
+                  )}
+                  onClick={() => handleAyahClick(ayah.numberInSurah)}
+                >
+                  <span className="quran-text">{ayah.text}</span>
+                  {/* Ayah number circle */}
+                  <span className="inline-flex items-center justify-center w-7 h-7 text-xs mx-1 rounded-full bg-gray-700 text-yellow-400 font-sans">
+                    {formatNumber(ayah.numberInSurah)}
+                  </span>
+                  
+                  {/* Ayah Actions (Hover) */}
+                  <div className="absolute -top-10 right-1/2 transform translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1 space-x-reverse bg-gray-900 rounded-md shadow-lg p-1 border border-gray-700 z-10">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCopyAyah(ayah);
+                      }}
+                      className="p-1.5 rounded-full hover:bg-gray-700 transition-colors text-gray-400 hover:text-white"
+                      aria-label="نسخ"
+                    >
+                      <Copy size={16} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleShareAyah(ayah);
+                      }}
+                      className="p-1.5 rounded-full hover:bg-gray-700 transition-colors text-gray-400 hover:text-white"
+                      aria-label="مشاركة"
+                    >
+                      <Share2 size={16} />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
