@@ -61,7 +61,7 @@ const reciters: Reciter[] = [
   {
     id: 'Albanna_murattal',
     name: 'محمود علي البنا (مرتل)',
-    audioUrl: 'https://server8.mp3quran.net/bna',
+    audioUrl: 'https://server8.mp3quran.net/bna/Almusshaf-Al-Murattal/',
     image: 'https://watanimg.elwatannews.com/image_archive/original_lower_quality/5551145621689862618.jpg',
     type: 'direct',
     fileExtension: '.mp3'
@@ -336,17 +336,22 @@ const SurahPage = () => {
     const formattedSurahNumber = surahNum.toString().padStart(3, '0');
     
     // Handle different reciter URL formats
+    let finalUrl = '';
+    
     if (reciterId === 'Albanna_mojawwad') {
-      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+      finalUrl = `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
     } else if (reciterId === 'Albanna_murattal') {
-      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+      finalUrl = `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
     } else if (reciterId === 'minshawi_mojawwad') {
-      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+      finalUrl = `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
     } else if (reciterId === 'minshawi_murattal') {
-      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+      finalUrl = `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
     } else {
-      return `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
+      finalUrl = `${reciter.audioUrl}${formattedSurahNumber}${reciter.fileExtension}`;
     }
+
+    console.log('Generated Audio URL:', finalUrl);
+    return finalUrl;
   };
 
   const createAndLoadAudio = (surahNum: number): boolean => {
