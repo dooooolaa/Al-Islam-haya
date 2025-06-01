@@ -1,117 +1,90 @@
 export const azkarData = [
-  // أذكار الصلاة
   {
     id: '1',
-    text: 'سُبْحَانَ رَبِّيَ الْعَظِيمِ',
-    count: 3,
+    text: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',
+    count: 100,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13756',
-    category: 'أذكار الصلاة',
-    explanation: 'يقال في الركوع'
+    category: 'أذكار الصباح',
+    explanation: 'من قالها مائة مرة حُطت خطاياه وإن كانت مثل زبد البحر'
   },
   {
     id: '2',
-    text: 'سُبْحَانَ رَبِّيَ الْأَعْلَى',
-    count: 3,
+    text: 'لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير',
+    count: 100,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13757',
-    category: 'أذكار الصلاة',
-    explanation: 'يقال في السجود'
+    category: 'أذكار الصباح',
+    explanation: 'كانت له عدل عشر رقاب، وكتبت له مائة حسنة، ومحيت عنه مائة سيئة، وكانت له حرزاً من الشيطان'
   },
   {
     id: '3',
-    text: 'رَبِّ اغْفِرْ لِي',
-    count: 3,
+    text: 'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، سُبْحَانَ اللَّهِ الْعَظِيمِ',
+    count: 100,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13758',
-    category: 'أذكار الصلاة',
-    explanation: 'يقال بين السجدتين'
+    category: 'أذكار المساء',
+    explanation: 'ثقيلتان في الميزان، حبيبتان إلى الرحمن'
   },
-  // أذكار النوم
   {
     id: '4',
-    text: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',
-    count: 1,
+    text: 'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ',
+    count: 100,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13759',
-    category: 'أذكار النوم',
-    explanation: 'يقال عند النوم'
+    category: 'أذكار المساء',
+    explanation: 'من قالها مائة مرة في اليوم غفرت ذنوبه وإن كانت مثل زبد البحر'
   },
   {
     id: '5',
-    text: 'اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ',
-    count: 3,
+    text: 'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',
+    count: 100,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13760',
     category: 'أذكار النوم',
-    explanation: 'يقال عند النوم'
+    explanation: 'من صلى علي حين يصبح وحين يمسي أدركته شفاعتي يوم القيامة'
   },
-  // أذكار الاستيقاظ
   {
     id: '6',
-    text: 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
-    count: 1,
+    text: 'لا حَوْلَ وَلا قُوَّةَ إِلا بِاللَّهِ',
+    count: 100,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13761',
-    category: 'أذكار الاستيقاظ',
-    explanation: 'يقال عند الاستيقاظ من النوم'
+    category: 'أذكار النوم',
+    explanation: 'كنز من كنوز الجنة'
   },
-  // أدعية الصباح والمساء
   {
     id: '7',
-    text: 'اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ',
-    count: 1,
+    text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ',
+    count: 3,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13762',
-    category: 'أدعية الصباح والمساء',
-    explanation: 'يقال في الصباح'
+    category: 'أذكار الاستيقاظ',
+    explanation: 'دعاء جامع لخيري الدنيا والآخرة'
   },
   {
     id: '8',
-    text: 'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ',
-    count: 1,
+    text: 'رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ',
+    count: 100,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13763',
-    category: 'أدعية الصباح والمساء',
-    explanation: 'يقال في المساء'
+    category: 'أذكار الاستيقاظ',
+    explanation: 'كان يتوب في اليوم مائة مرة'
   },
-  // أدعية الكرب
   {
     id: '9',
-    text: 'لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ',
-    count: 3,
+    text: 'اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ',
+    count: 1,
     audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13764',
-    category: 'أدعية الكرب',
-    explanation: 'يقال عند الكرب والشدة'
+    category: 'أذكار متنوعة',
+    explanation: 'سيد الاستغفار'
   },
-  // أدعية الهم والحزن
   {
     id: '10',
-    text: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ',
-    count: 1,
-    audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13765',
-    category: 'أدعية الهم والحزن',
-    explanation: 'يقال عند الهم والحزن'
+    text: "اللَّهُمَّ اغْفِرْ لِي، وَارْحَمْنِي، وَعَافِنِي، وَارْزُقْنِي",
+    count: 3,
+    audio: "https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13765",
+    category: "أذكار متنوعة",
+    explanation: 'دعاء جامع لخيري الدنيا والآخرة، يسأل فيه العبد ربه المغفرة والسعة في الدار والبركة في الرزق'
   },
-  // أدعية الاستخارة
   {
     id: '11',
-    text: 'اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ',
-    count: 1,
-    audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13766',
-    category: 'أدعية الاستخارة',
-    explanation: 'يقال عند الحاجة إلى الاستخارة'
-  },
-  // أدعية متنوعة
-  {
-    id: '12',
-    text: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',
+    text: "اللَّهُمَّ اجْعَلْنَا مِنْ عَفَوْتَ وَرَضِيتَ عَنْهُمْ وَغَفَرْتَ لَهُمْ وَاسْتَجَبْتَ دُعَائِهِمْ وَكَتَبْتَ لَهُمُ الْجَنَّةَ",
     count: 3,
-    audio: 'https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13767',
-    category: 'أدعية متنوعة',
-    explanation: 'من أفضل الأدعية الجامعة لخيري الدنيا والآخرة'
+    audio: "https://audio.islamweb.net/audio/index.php?page=fullcontent&audioid=13766",
+    category: "أذكار متنوعة",
+    explanation: 'دعاء يجمع بين طلب العفو والرضا والمغفرة واستجابة الدعاء ودخول الجنة'
   }
-];
-
-export const categories = [
-  'أذكار الصلاة',
-  'أذكار النوم',
-  'أذكار الاستيقاظ',
-  'أدعية الصباح والمساء',
-  'أدعية الكرب',
-  'أدعية الهم والحزن',
-  'أدعية الاستخارة',
-  'أدعية متنوعة'
 ];
