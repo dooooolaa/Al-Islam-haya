@@ -50,11 +50,19 @@ const reciters: Reciter[] = [
     type: 'direct',
     fileExtension: '.mp3'
   },
-  { 
+  {
     id: 'alafasy',
     name: 'مشاري راشد العفاسي',
     audioUrl: 'https://server7.mp3quran.net/afs/',
-    image: '', // Placeholder - Add image path or default
+    image: '/path/to/alafasy/image.jpg', // Placeholder - Update with actual path
+    type: 'direct',
+    fileExtension: '.mp3'
+  },
+  {
+    id: 'minshawi_mojawwad',
+    name: 'محمد صديق المنشاوي (مجود)',
+    audioUrl: 'https://server8.mp3quran.net/minsh/',
+    image: '/path/to/minshawi/image.jpg', // Placeholder - Update with actual path
     type: 'direct',
     fileExtension: '.mp3'
   },
@@ -94,14 +102,6 @@ const reciters: Reciter[] = [
     id: 'husary_mojawwad',
     name: 'محمود خليل الحصري (مجود)',
     audioUrl: 'https://server13.mp3quran.net/husr/',
-    image: '', // Placeholder
-    type: 'direct',
-    fileExtension: '.mp3'
-  },
-  { 
-    id: 'minshawi_mojawwad',
-    name: 'محمد صديق المنشاوي (مجود)',
-    audioUrl: 'https://server8.mp3quran.net/minsh/',
     image: '', // Placeholder
     type: 'direct',
     fileExtension: '.mp3'
@@ -655,9 +655,9 @@ const SurahPage = () => {
             
              {/* Reciter Select Dropdown */}
              <div className="flex items-center">
-               {/* <label htmlFor="reciter-select" className="ml-2 text-sm font-medium text-gray-400">
+               <label htmlFor="reciter-select" className="ml-2 text-sm font-medium text-gray-400">
                  القارئ:
-               </label> */} 
+               </label>
                <select
                  id="reciter-select"
                  value={selectedReciterId}
