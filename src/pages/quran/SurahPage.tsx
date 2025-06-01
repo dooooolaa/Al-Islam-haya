@@ -139,14 +139,6 @@ const reciters: Reciter[] = [
     fileExtension: '.mp3'
   },
   { 
-    id: 'husary_murattal',
-    name: 'محمود خليل الحصري (مرتل)',
-    audioUrl: 'https://server13.mp3quran.net/husr/Rewayat-Qalon-A-n-Nafi',
-    image: 'https://watanimg.elwatannews.com/image_archive/original_lower_quality/18194265071637693809.jpg', // Placeholder
-    type: 'direct',
-    fileExtension: '.mp3'
-  },
-  { 
     id: 'ghamdi',
     name: 'سعد الغامدي',
     audioUrl: 'https://server7.mp3quran.net/s_gmd/',
