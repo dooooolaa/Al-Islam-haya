@@ -5,7 +5,7 @@
   "main": "src/scripts/fetchDorarHadiths.ts",
   "type": "module",
   "scripts": {
-    "start": "ts-node --esm src/scripts/fetchDorarHadiths.ts"
+    "start": "node --loader ts-node/esm src/scripts/fetchDorarHadiths.ts"
   },
   "dependencies": {
     "axios": "^1.6.7",
