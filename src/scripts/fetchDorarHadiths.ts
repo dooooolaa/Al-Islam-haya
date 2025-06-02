@@ -8,7 +8,7 @@ import Database from 'better-sqlite3';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const API_KEY = 'ضع_مفتاحك_هنا';
+const API_KEY = '$2y$10$7NhGyC1Ljp9y2DGF6wx6CeyOE34FVy0WOnrMHYhA87H056nHHaWi';
 const BASE_URL = `https://hadithapi.com/api/hadiths/?apiKey=${API_KEY}`;
 
 // Initialize database
@@ -44,10 +44,12 @@ interface Hadith {
   grade: string;
 }
 
-async function fetchHadithsFromAPI(page: number = 1): Promise<{ hadiths: Hadith[], hasNext: boolean }> {
+async function fetchHadithsFromAPI(page: number = 1): Promise<{ hadiths: Hadith[], hasNext: boolean, total: number }> {
   try {
-    const response = await axios.get(BASE_URL + `&page=${page}`);
-    if (response.data && response.data.data && response.data.data.hadiths) {
+    console.log(`Fetching page ${page}...`);
+    const response = await axios.get(BASE_URL + `&page=${page}&limit=100`);
+    
+    if (response.data && response.data.data) {
       const hadiths = response.data.data.hadiths.map((h: any) => ({
         id: h.id,
         hadithKey: h.hadithKey,
@@ -58,13 +60,17 @@ async function fetchHadithsFromAPI(page: number = 1): Promise<{ hadiths: Hadith[
         reference: h.reference,
         grade: h.grade
       }));
+
       const hasNext = !!response.data.data.nextPageUrl;
-      return { hadiths, hasNext };
+      const total = response.data.data.total || 0;
+      
+      console.log(`Fetched ${hadiths.length} hadiths from page ${page}`);
+      return { hadiths, hasNext, total };
     }
-    return { hadiths: [], hasNext: false };
+    return { hadiths: [], hasNext: false, total: 0 };
   } catch (error) {
     console.error(`Error fetching page ${page}:`, error);
-    return { hadiths: [], hasNext: false };
+    return { hadiths: [], hasNext: false, total: 0 };
   }
 }
 
@@ -98,19 +104,29 @@ async function fetchAllHadiths() {
   let page = 1;
   let hasNext = true;
   let totalHadiths = 0;
+  let totalPages = 0;
 
   console.log('Starting to fetch hadiths from HadithAPI.com...');
 
   while (hasNext) {
-    console.log(`Fetching page ${page}...`);
-    const { hadiths, hasNext: next } = await fetchHadithsFromAPI(page);
+    const { hadiths, hasNext: next, total } = await fetchHadithsFromAPI(page);
     
-    if (hadiths.length === 0) break;
+    if (hadiths.length === 0) {
+      console.log('No more hadiths to fetch.');
+      break;
+    }
     
     saveHadithsToDatabase(hadiths);
     totalHadiths += hadiths.length;
-    console.log(`Saved ${hadiths.length} hadiths to database. Total: ${totalHadiths}`);
     
+    if (total && !totalPages) {
+      totalPages = Math.ceil(total / 100);
+      console.log(`Total hadiths to fetch: ${total} (${totalPages} pages)`);
+    }
+    
+    console.log(`Progress: ${totalHadiths} hadiths saved (Page ${page}/${totalPages})`);
+    
+    // Add a delay to avoid rate limiting
     await new Promise(resolve => setTimeout(resolve, 1000));
     page++;
     hasNext = next;
@@ -121,6 +137,7 @@ async function fetchAllHadiths() {
   // Create a backup of the database
   const backupPath = path.join(__dirname, '../data/hadiths_backup.db');
   fs.copyFileSync(path.join(__dirname, '../data/hadiths.db'), backupPath);
+  console.log(`Database backup created at: ${backupPath}`);
   
   return totalHadiths;
 }

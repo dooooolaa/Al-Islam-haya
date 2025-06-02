@@ -1,32 +1,26 @@
-import { Routes, Route } from 'react-router-dom';
-import Layout from './components/layout/Layout';
-import HomePage from './pages/HomePage';
-import QuranPage from './pages/quran/QuranPage';
-import SurahPage from './pages/quran/SurahPage';
-import HadithPage from './pages/hadith/HadithPage';
-import AdhkarPage from './pages/adhkar/AdhkarPage';
-import DuaPage from './pages/dua/DuaPage';
-import CalendarPage from './pages/calendar/CalendarPage';
-import QiblaPage from './pages/qibla/QiblaPage';
-import NotFoundPage from './pages/NotFoundPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
+import Home from './pages/Home';
+import HadithSearch from './pages/HadithSearch';
+import HadithDetails from './pages/HadithDetails';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="quran">
-          <Route index element={<QuranPage />} />
-          <Route path=":surahNumber" element={<SurahPage />} />
-        </Route>
-        <Route path="hadith" element={<HadithPage />} />
-        <Route path="adhkar" element={<AdhkarPage />} />
-        <Route path="dua" element={<DuaPage />} />
-        <Route path="calendar" element={<CalendarPage />} />
-        <Route path="qibla" element={<QiblaPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+    <ThemeProvider>
+      <Router>
+        <div className="app">
+          <Navbar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<HadithSearch />} />
+              <Route path="/hadith/:id" element={<HadithDetails />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
