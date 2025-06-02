@@ -14,7 +14,7 @@ interface Hadith {
 
 async function fetchHadithsFromPage(pageNumber: number): Promise<Hadith[]> {
   try {
-    const response = await axios.get(`https://dorar.net/hadith/search?page=${pageNumber}`);
+    const response = await axios.get(`https://dorar.net/=${pageNumber}`);
     const $ = cheerio.load(response.data);
     const hadiths: Hadith[] = [];
 
