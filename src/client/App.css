@@ -1,0 +1,138 @@
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  direction: rtl;
+  font-family: 'Arial', sans-serif;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  color: #2c3e50;
+  font-size: 2.5em;
+}
+
+.search-container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.search-input,
+.select-input {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-input:focus,
+.select-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+  margin: 20px 0;
+}
+
+.results {
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.hadiths-list {
+  display: grid;
+  gap: 20px;
+}
+
+.hadith-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.hadith-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.hadith-arabic {
+  font-size: 1.2em;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.hadith-english {
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.hadith-meta {
+  display: flex;
+  gap: 15px;
+  color: #7f8c8d;
+  font-size: 0.9em;
+}
+
+.hadith-meta span {
+  background: #f5f6fa;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+  }
+  
+  .search-input,
+  .select-input {
+    width: 100%;
+  }
+  
+  .hadith-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+} 
