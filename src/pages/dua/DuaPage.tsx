@@ -112,7 +112,7 @@ const categories = [
 ];
 
 const DuaPage = () => {
-  const [activeCategory, setActiveCategory] = useState('arafah');
+  const [activeCategory, setActiveCategory] = useState('protection');
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState<string[]>([]);
   const [showTranslation, setShowTranslation] = useState<Record<string, boolean>>({});
@@ -139,7 +139,7 @@ const DuaPage = () => {
 
   const handleShareDua = async (dua: Dua) => {
     const shareUrl = generateShareLink(`/dua?category=${dua.category}&id=${dua.id}`);
-    
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -173,8 +173,8 @@ const DuaPage = () => {
   };
 
   // Filter duas based on search query
-  const filteredDuas = duasData[activeCategory]?.filter(dua => 
-    dua.text.includes(searchQuery) || 
+  const filteredDuas = duasData[activeCategory]?.filter(dua =>
+    dua.text.includes(searchQuery) ||
     (dua.translation && dua.translation.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
@@ -186,7 +186,7 @@ const DuaPage = () => {
         transition={{ duration: 0.5 }}
       >
         <h1 className="section-title">الأدعية</h1>
-        
+
         {/* Search Bar */}
         <div className="max-w-md mx-auto mb-8">
           <div className="relative">
@@ -200,7 +200,7 @@ const DuaPage = () => {
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
           </div>
         </div>
-        
+
         {/* Category Tabs */}
         <div className="flex flex-wrap justify-center mb-8">
           {categories.map(category => (
@@ -210,93 +210,4 @@ const DuaPage = () => {
               className={`px-4 py-2 m-1 rounded-md font-medium transition-colors ${
                 activeCategory === category.id
                   ? 'bg-light-accent dark:bg-dark-accent text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Duas List */}
-        <motion.div
-          className="space-y-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          {filteredDuas?.map((dua) => (
-            <div key={dua.id} className="card hover:shadow-lg transition-all duration-300">
-              <div className="mb-4">
-                <p className="text-xl leading-relaxed font-quran">{dua.text}</p>
-                
-                {dua.translation && showTranslation[dua.id] && (
-                  <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-md">
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{dua.translation}</p>
-                  </div>
-                )}
-              </div>
-              
-              <div className="flex flex-wrap items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
-                <div className="flex items-center">
-                  {dua.source && (
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{dua.source}</p>
-                  )}
-                </div>
-
-                <div className="flex items-center space-x-3 space-x-reverse">
-                  {dua.translation && (
-                    <button
-                      onClick={() => toggleTranslation(dua.id)}
-                      className="text-sm text-light-accent dark:text-dark-accent hover:underline"
-                    >
-                      {showTranslation[dua.id] ? 'إخفاء الترجمة' : 'عرض الترجمة'}
-                    </button>
-                  )}
-                  
-                  <button
-                    onClick={() => handleCopyDua(dua.text)}
-                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme"
-                    aria-label="نسخ"
-                  >
-                    <Copy size={18} className="text-gray-600 dark:text-gray-400" />
-                  </button>
-                  
-                  <button
-                    onClick={() => handleShareDua(dua)}
-                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme"
-                    aria-label="مشاركة"
-                  >
-                    <Share2 size={18} className="text-gray-600 dark:text-gray-400" />
-                  </button>
-                  
-                  <button
-                    onClick={() => toggleFavorite(dua.id)}
-                    className={`p-2 rounded-full transition-theme ${
-                      favorites.includes(dua.id)
-                        ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                        : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-                    }`}
-                    aria-label={favorites.includes(dua.id) ? 'إزالة من المفضلة' : 'إضافة للمفضلة'}
-                  >
-                    <Heart size={18} fill={favorites.includes(dua.id) ? 'currentColor' : 'none'} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {filteredDuas?.length === 0 && (
-            <div className="text-center py-10">
-              <p className="text-lg text-gray-600 dark:text-gray-400">
-                لا توجد نتائج{searchQuery ? ` للبحث عن "${searchQuery}"` : ''}
-              </p>
-            </div>
-          )}
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
-
-export default DuaPage;
+                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover
