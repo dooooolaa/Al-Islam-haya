@@ -112,7 +112,7 @@ const categories = [
 ];
 
 const DuaPage = () => {
-  const [activeCategory, setActiveCategory] = useState('protection');
+  const [activeCategory, setActiveCategory] = useState('arafah');
   const [searchQuery, setSearchQuery] = useState('');
   const [favorites, setFavorites] = useState<string[]>([]);
   const [showTranslation, setShowTranslation] = useState<Record<string, boolean>>({});
