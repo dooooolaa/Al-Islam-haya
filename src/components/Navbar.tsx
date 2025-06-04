@@ -14,6 +14,7 @@ export default function Navbar() {
         <div className="nav-links">
           <Link to="/" className="nav-link">الرئيسية</Link>
           <Link to="/search" className="nav-link">البحث في الأحاديث</Link>
+          <Link to="/dua" className="nav-link">الأدعية</Link>
         </div>
 
         <button onClick={toggleTheme} className="theme-toggle">

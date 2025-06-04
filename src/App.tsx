@@ -3,6 +3,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import Home from './pages/Home';
 import HadithSearch from './pages/HadithSearch';
 import HadithDetails from './pages/HadithDetails';
+import DuaPage from './pages/dua/DuaPage';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<HadithSearch />} />
               <Route path="/hadith/:id" element={<HadithDetails />} />
+              <Route path="/dua" element={<DuaPage />} />
             </Routes>
           </main>
         </div>
