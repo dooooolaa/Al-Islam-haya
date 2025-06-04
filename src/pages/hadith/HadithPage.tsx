@@ -117,7 +117,7 @@ const HadithPage = () => {
     if (totalPages <= 1) return null;
 
     const pageNumbers = [];
-    const maxVisiblePages = 5;
+    const maxVisiblePages = 10;
     
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
