@@ -14,6 +14,50 @@ interface Dua {
 
 // Mock data - In a real app, this would come from an API
 const duasData: Record<string, Dua[]> = {
+  arafah: [
+    {
+      id: 'a1',
+      text: 'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',
+      translation: 'There is no deity except Allah, alone, without any partner. To Him belongs the dominion and to Him belongs all praise, and He is over all things Omnipotent.',
+      source: 'رواه الترمذي',
+      category: 'arafah'
+    },
+    {
+      id: 'a2',
+      text: 'اللَّهُمَّ لَكَ الْحَمْدُ كَالَّذِي نَقُولُ وَخَيْرًا مِمَّا نَقُولُ، اللَّهُمَّ لَكَ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي، وَإِلَيْكَ مَآبِي، وَرَبِّي أَنْتَ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، وَوَسْوَسَةِ الصَّدْرِ، وَشَتَّاتِ الْأَمْرِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا تَجِيءُ بِهِ الرِّيحُ',
+      translation: 'O Allah, to You belongs all praise as we say and better than what we say. O Allah, to You belongs my prayer, my sacrifice, my life and my death, and to You is my return. You are my Lord. O Allah, I seek refuge in You from the punishment of the grave, the whisperings of the chest, and the scattering of affairs. O Allah, I seek refuge in You from the evil of what the wind brings.',
+      source: 'رواه الترمذي',
+      category: 'arafah'
+    },
+    {
+      id: 'a3',
+      text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ فِي سَفَرِي هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ',
+      translation: 'O Allah, I ask You on this journey of mine for righteousness, piety, and such deeds as are pleasing to You. O Allah, make this journey easy for us and fold up for us its distance. O Allah, You are the Companion on the journey and the Successor over the family. O Allah, I seek refuge in You from the hardships of travel, from having a change of heart and from having a bad return in property and family.',
+      source: 'رواه مسلم',
+      category: 'arafah'
+    },
+    {
+      id: 'a4',
+      text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِ مَا سَأَلَكَ مِنْهُ عِبَادُكَ الصَّالِحُونَ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا اسْتَعَاذَ مِنْهُ عِبَادُكَ الصَّالِحُونَ',
+      translation: 'O Allah, I ask You for the good that Your righteous servants have asked You for, and I seek refuge in You from the evil that Your righteous servants have sought refuge from.',
+      source: 'رواه الترمذي وابن ماجه',
+      category: 'arafah'
+    },
+    {
+      id: 'a5',
+      text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ يَا مَنْ لَا تَرَاهُ الْعُيُونُ، وَلَا تُخَالِطُهُ الظُّنُونُ، وَلَا يَصِفُهُ الْوَاصِفُونَ، وَلَا تُغَيِّرُهُ الْحَوَادِثُ وَلَا يَخْشَاهُ الدَّهْرُ، يَا مَنْ لَا يَشْغَلُهُ حَافِظٌ عَنْ حَافِظٍ، وَلَا يَخْتَلِفُ عَلَيْهِ الْأُمَرَاءُ، وَلَا يَخْشَى الدَّوَائِرَ، يَعْلَمُ مِقْدَارَ الْجِبَالِ، وَمَكَايِيلَ الْبِحَارِ، وَعَدَدَ قَطْرِ الْأَمْطَارِ، وَعَدَدَ وَرَقِ الْأَشْجَارِ، وَعَدَدَ مَا أَظْلَمَ عَلَيْهِ اللَّيْلُ، وَأَشْرَقَ عَلَيْهِ النَّهَارُ، وَلَا تَتَوَارَى مِنْهُ ظُلْمَةُ ظَالِمٍ، وَلَا تَخْفَى عَلَيْهِ خَافِيَةٌ',
+      translation: 'O Allah, I ask You, O He Who cannot be seen by eyes, nor can He be imagined by thoughts, nor can He be described by describers, nor can He be changed by events, nor can He be feared by time. O He Who is not distracted by one guardian from another, nor do the rulers differ over Him, nor does He fear the cycles of time. He knows the measure of the mountains, the measures of the seas, the number of raindrops, the number of tree leaves, the number of what the night has darkened and the day has brightened. No darkness of an oppressor is hidden from Him, and no secret is concealed from Him.',
+      source: 'رواه الطبراني',
+      category: 'arafah'
+    },
+    {
+      id: 'a6',
+      text: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ فِي سَفَرِي هَذَا مِنَ الْبِرِّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ، وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ وَالْوَلَدِ',
+      translation: 'O Allah, I ask You on this journey of mine for righteousness, piety, and such deeds as are pleasing to You. O Allah, make this journey easy for us and fold up for us its distance. O Allah, You are the Companion on the journey and the Successor over the family. O Allah, I seek refuge in You from the hardships of travel, from having a change of heart and from having a bad return in property, family and children.',
+      source: 'رواه مسلم',
+      category: 'arafah'
+    }
+  ],
   protection: [
     {
       id: 'p1',
@@ -60,6 +104,7 @@ const duasData: Record<string, Dua[]> = {
 };
 
 const categories = [
+  { id: 'arafah', name: 'أدعية عرفة' },
   { id: 'protection', name: 'أدعية الحماية والحفظ' },
   { id: 'forgiveness', name: 'أدعية المغفرة' },
   { id: 'morning', name: 'أدعية الصباح' },
