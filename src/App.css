@@ -1,3 +1,8 @@
+/* Arabic fonts */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -125,12 +130,6 @@
   }
 }
 
-
-/* Arabic fonts */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-
 /* Islamic website specific styles */
 .islamic-card {
   @apply bg-white rounded-lg shadow-md p-6 border-2 transition-all duration-300 hover:shadow-lg;
@@ -239,5 +238,4 @@
 .section-grid {
   @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto;
 }
-
 
